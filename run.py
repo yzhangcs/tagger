@@ -92,7 +92,6 @@ if __name__ == '__main__':
                               n_embed=config.n_embed,
                               n_hidden=config.n_hidden,
                               n_out=corpus.n_tags,
-                              embed=corpus.embed,
                               drop=args.drop)
     elif args.model == 'elmo_lstm_crf':
         print(f"{'':2}n_elmo: {config.n_elmo}\n"
@@ -105,7 +104,6 @@ if __name__ == '__main__':
                               n_embed=config.n_embed,
                               n_hidden=config.n_hidden,
                               n_out=corpus.n_tags,
-                              embed=corpus.embed,
                               drop=args.drop)
     model.load_pretrained(corpus.embed)
     print(f"{model}\n")

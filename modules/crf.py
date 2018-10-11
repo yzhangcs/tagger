@@ -52,7 +52,7 @@ class CRF(nn.Module):
 
     def get_score(self, emit, target, mask):
         T, B, N = emit.shape
-        scores = torch.zeros(T, B)
+        scores = torch.zeros(T, B, device=emit.device)
 
         # 加上句间迁移分数
         scores[1:] += self.trans[target[:-1], target[1:]]
@@ -73,8 +73,8 @@ class CRF(nn.Module):
     def viterbi(self, emit, mask):
         T, B, N = emit.shape
         lens = mask.sum(dim=0)
-        delta = torch.zeros(T, B, N)
-        paths = torch.zeros(T, B, N, dtype=torch.long)
+        delta = torch.zeros(T, B, N, device=emit.device)
+        paths = torch.zeros(T, B, N, device=emit.device, dtype=torch.long)
 
         delta[0] = self.strans + emit[0]  # [B, N]
 

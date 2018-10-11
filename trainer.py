@@ -19,7 +19,7 @@ class Trainer(object):
         self.task = task
 
     def fit(self, trainset, devset, testset,
-            batch_size, epochs, interval, eta, file):
+            batch_size, epochs, interval, lr, file):
         # 设置数据加载器
         train_loader = DataLoader(dataset=trainset,
                                   batch_size=batch_size,
@@ -36,7 +36,7 @@ class Trainer(object):
         # 记录最大准确率及对应的迭代次数
         max_e, max_val = 0, 0.0
         # 设置优化器为Adam
-        self.optimizer = optim.Adam(params=self.model.parameters(), lr=eta)
+        self.optimizer = optim.Adam(params=self.model.parameters(), lr=lr)
 
         if self.task == 'pos':
             for epoch in range(1, epochs + 1):

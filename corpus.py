@@ -28,13 +28,13 @@ class Corpus(object):
         self.cdict = {c: i for i, c in enumerate(self.chars)}
 
         # 填充词汇索引
-        self.pwi = self.wdict[self.PAD]
+        self.pad_wi = self.wdict[self.PAD]
         # 未知词汇索引
-        self.uwi = self.wdict[self.UNK]
+        self.unk_wi = self.wdict[self.UNK]
         # 填充字符索引
-        self.pci = self.cdict[self.PAD]
+        self.pad_ci = self.cdict[self.PAD]
         # 未知字符索引
-        self.uci = self.cdict[self.UNK]
+        self.unk_ci = self.cdict[self.UNK]
 
         # 句子数量
         self.n_sents = len(self.sents)
@@ -70,10 +70,10 @@ class Corpus(object):
         self.wdict = {w: i for i, w in enumerate(self.words)}
         self.cdict = {c: i for i, c in enumerate(self.chars)}
         # 更新索引
-        self.pwi = self.wdict[self.PAD]
-        self.uwi = self.wdict[self.UNK]
-        self.pci = self.cdict[self.PAD]
-        self.uci = self.cdict[self.UNK]
+        self.pad_wi = self.wdict[self.PAD]
+        self.unk_wi = self.wdict[self.UNK]
+        self.pad_ci = self.cdict[self.PAD]
+        self.unk_ci = self.cdict[self.UNK]
         # 更新词汇和字符数
         self.n_words = len(self.words)
         self.n_chars = len(self.chars)
@@ -84,16 +84,16 @@ class Corpus(object):
 
         for wordseq, tagseq in sents:
             wiseq = [self.wdict[w] if w in self.wdict
-                     else self.wdict.get(w.lower(), self.uwi)
+                     else self.wdict.get(w.lower(), self.unk_wi)
                      for w in wordseq]
             tiseq = [self.tdict.get(t, 0) for t in tagseq]
-            x.append(torch.tensor(wiseq, dtype=torch.long))
-            y.append(torch.tensor(tiseq, dtype=torch.long))
+            x.append(torch.tensor(wiseq, dtype=torch.long).cuda())
+            y.append(torch.tensor(tiseq, dtype=torch.long).cuda())
             char_x.append(torch.tensor([
-                [self.cdict.get(c, self.uci) for c in w[:max_len]] +
+                [self.cdict.get(c, self.unk_ci) for c in w[:max_len]] +
                 [0] * (max_len - len(w))
                 for w in wordseq
-            ]))
+            ]).cuda())
         reprs = (x, y) if not use_char else (x, y, char_x)
 
         return reprs
@@ -116,7 +116,7 @@ class Corpus(object):
         embed = torch.tensor(embed, dtype=torch.float)
         embed_indices = [self.wdict[w] for w in words]
         upper_indices = [self.wdict[w] for w in self.words if not w.islower()]
-        lower_indices = [self.wdict.get(w.lower(), self.uwi)
+        lower_indices = [self.wdict.get(w.lower(), self.unk_wi)
                          for w in self.words if not w.islower()]
         extended_embed = torch.Tensor(self.n_words, embed.size(1))
         init_embedding(extended_embed)

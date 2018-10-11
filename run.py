@@ -33,20 +33,25 @@ if __name__ == '__main__':
                         help='set the max num of epochs')
     parser.add_argument('--interval', action='store', default=10, type=int,
                         help='set the max interval to stop')
-    parser.add_argument('--eta', action='store', default=0.001, type=float,
+    parser.add_argument('--lr', action='store', default=0.001, type=float,
                         help='set the learning rate of training')
     parser.add_argument('--threads', '-t', action='store', default=4, type=int,
                         help='set the max num of threads')
+    parser.add_argument('--device', '-d', action='store', default=-1, type=int,
+                        help='set the id of GPU to use')
     parser.add_argument('--seed', '-s', action='store', default=1, type=int,
                         help='set the seed for generating random numbers')
     parser.add_argument('--file', '-f', action='store', default='model.pt',
                         help='set where to store the model')
     args = parser.parse_args()
 
-    print(f"Set the max num of threads to {args.threads}\n"
-          f"Set the seed for generating random numbers to {args.seed}\n")
+    print(f"Set the max num of threads to {args.threads}")
+    print(f"Set the seed for generating random numbers to {args.seed}")
     torch.set_num_threads(args.threads)
     torch.manual_seed(args.seed)
+
+    if args.device >= 0:
+        torch.cuda.set_device(args.device)
 
     # 根据模型读取配置
     config = config.config[args.model]
@@ -69,9 +74,9 @@ if __name__ == '__main__':
                           corpus=corpus,
                           use_char=config.use_char,
                           use_elmo=config.use_elmo)
-    print(f"{'':2}size of trainset: {len(trainset)}\n"
-          f"{'':2}size of devset: {len(devset)}\n"
-          f"{'':2}size of testset: {len(testset)}\n")
+    print(f"{'':2}size of trainset: {len(trainset)}")
+    print(f"{'':2}size of devset: {len(devset)}")
+    print(f"{'':2}size of testset: {len(testset)}")
 
     # 设置随机数种子
     torch.manual_seed(args.seed)
@@ -106,6 +111,8 @@ if __name__ == '__main__':
                               n_out=corpus.n_tags,
                               drop=args.drop)
     model.load_pretrained(corpus.embed)
+    if args.device >= 0:
+        model = model.cuda()
     print(f"{model}\n")
 
     trainer = Trainer(model=model, corpus=corpus, task=args.task)
@@ -115,5 +122,5 @@ if __name__ == '__main__':
                 batch_size=args.batch_size,
                 epochs=args.epochs,
                 interval=args.interval,
-                eta=args.eta,
+                lr=args.lr,
                 file=args.file)

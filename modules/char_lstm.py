@@ -21,13 +21,6 @@ class CharLSTM(nn.Module):
                             batch_first=True,
                             bidirectional=True)
 
-        # 初始化权重
-        self.apply(self.init_weights)
-
-    def init_weights(self, m):
-        if type(m) == nn.Embedding:
-            init_embedding(m.weight)
-
     def forward(self, x):
         B, T = x.shape
         # 获取掩码

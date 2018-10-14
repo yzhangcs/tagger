@@ -19,7 +19,7 @@ class Trainer(object):
         self.task = task
 
     def fit(self, trainset, devset, testset,
-            batch_size, epochs, interval, lr, file):
+            batch_size, epochs, patience, lr, file):
         # 设置数据加载器
         train_loader = DataLoader(dataset=trainset,
                                   batch_size=batch_size,
@@ -58,7 +58,7 @@ class Trainer(object):
             if dev_metric > max_metric:
                 torch.save(self.model, file)
                 max_e, max_metric = epoch, dev_metric
-            elif epoch - max_e >= interval:
+            elif epoch - max_e >= patience:
                 break
         self.model = torch.load(file).cuda()
         loss, metric = self.evaluate(test_loader)

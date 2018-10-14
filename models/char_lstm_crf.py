@@ -39,7 +39,6 @@ class CHAR_LSTM_CRF(nn.Module):
         self.embed = nn.Embedding.from_pretrained(embed, False)
 
     def forward(self, x, char_x):
-        B, T = x.shape
         # 获取掩码
         mask = x.gt(0)
         # 获取句子长度

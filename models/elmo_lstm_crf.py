@@ -35,7 +35,6 @@ class ELMO_LSTM_CRF(nn.Module):
         self.embed = nn.Embedding.from_pretrained(embed, False)
 
     def forward(self, x, elmo):
-        B, T = x.shape
         # 获取掩码
         mask = x.gt(0)
         # 获取句子长度

@@ -25,8 +25,6 @@ if __name__ == '__main__':
     parser.add_argument('--task',  default='ner',
                         choices=['chunking', 'ner', 'pos'],
                         help='choose the model for Sequence Labeling')
-    parser.add_argument('--crf', action='store_true', default=False,
-                        help='use crf')
     parser.add_argument('--drop', action='store', default=0.5, type=float,
                         help='set the prob of dropout')
     parser.add_argument('--batch_size', action='store', default=50, type=int,

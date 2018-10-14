@@ -1,8 +1,8 @@
-from typing import List
+# -*- coding: utf-8 -*-
 
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
+from torch import nn
+from torch.nn import functional as F
 
 
 class ScalarMix(nn.Module):

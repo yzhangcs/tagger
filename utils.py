@@ -4,7 +4,7 @@ import os
 
 import h5py
 import torch
-import torch.nn as nn
+from torch import nn
 
 
 def init_embedding(embed):
@@ -35,6 +35,15 @@ def get_elmo(fdata):
     num_sentences = len(h5py_file.keys()) - 1
     reprs = [torch.tensor(h5py_file.get(str(i))).transpose(0, 1)
              for i in range(num_sentences)]
+
+    return reprs
+
+
+def get_parser(fdata):
+    fparser = os.path.splitext(fdata)[0] + '.parser'
+
+    reprs = torch.load(fparser)
+    reprs = [torch.tensor(i) for i in reprs]
 
     return reprs
 

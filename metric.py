@@ -1,7 +1,34 @@
 # -*- coding: utf-8 -*-
 
+import torch
 
-class AccuracyMethod(object):
+
+class Metric(object):
+
+    def __lt__(self, other):
+        return self.score < other
+
+    def __le__(self, other):
+        return self.score <= other
+
+    def __eq__(self, other):
+        return self.score == other
+
+    def __ge__(self, other):
+        return self.score >= other
+
+    def __gt__(self, other):
+        return self.score > other
+
+    def __ne__(self, other):
+        return self.score != other
+
+    @property
+    def score(self):
+        raise NotImplementedError
+
+
+class AccuracyMethod(Metric):
 
     def __init__(self, eps=1e-5):
         super(AccuracyMethod, self).__init__()
@@ -15,12 +42,19 @@ class AccuracyMethod(object):
             self.tp += torch.sum(predict == target).item()
             self.total += len(target)
 
+    def __repr__(self):
+        return f"Accuracy: {self.accuracy:.2%}"
+
+    @property
+    def score(self):
+        return self.accuracy
+
     @property
     def accuracy(self):
         return self.tp / (self.total + self.eps)
 
 
-class SpanF1Method(object):
+class SpanF1Method(Metric):
 
     def __init__(self, tags, eps=1e-5):
         super(SpanF1Method, self).__init__()
@@ -38,6 +72,15 @@ class SpanF1Method(object):
             self.tp += len(pred_spans & gold_spans)
             self.pred += len(pred_spans)
             self.gold += len(gold_spans)
+
+    def __repr__(self):
+        p, r, f = self.precision, self.recall, self.f_score
+
+        return f"Precision: {p:.2%} Recall: {r:.2%} F: {f:.2%}"
+
+    @property
+    def score(self):
+        return self.f_score
 
     @property
     def precision(self):

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import torch
-import torch.nn as nn
+from torch import nn
 from torch.nn.utils.rnn import pack_padded_sequence
 
 from utils import init_embedding

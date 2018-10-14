@@ -1,7 +1,5 @@
-nohup: 忽略输入
 Set the max num of threads to 4
 Set the seed for generating random numbers to 1
-
 Preprocess the data
 Corpus(
   num of sentences: 38219
@@ -9,18 +7,16 @@ Corpus(
   num of tags: 46
   num of chars: 517
 )
-
 Load the dataset
   size of trainset: 38219
   size of devset: 5527
   size of testset: 5462
-
 Create Neural Network
-  n_vocab: 408327
-  n_embed: 100
   n_char: 517
   n_char_embed: 30
   n_char_out: 300
+  n_vocab: 408327
+  n_embed: 100
   n_hidden: 150
   n_out: 46
 
@@ -41,108 +37,120 @@ CHAR_LSTM_CRF(
 )
 
 Epoch: 1 / 100:
-train: Loss: 2.2070 Accuracy: 97.21%
-dev:   Loss: 2.3572 Accuracy: 96.97%
-test:  Loss: 2.2222 Accuracy: 97.05%
-0:15:01.840534s elapsed
+train: Loss: 2.1848 Accuracy: 97.23%
+dev:   Loss: 2.3061 Accuracy: 97.05%
+test:  Loss: 2.2411 Accuracy: 97.03%
+0:06:09.196354s elapsed
 
 Epoch: 2 / 100:
-train: Loss: 1.6625 Accuracy: 97.78%
-dev:   Loss: 1.9217 Accuracy: 97.40%
-test:  Loss: 1.8300 Accuracy: 97.44%
-0:15:45.604964s elapsed
+train: Loss: 1.6712 Accuracy: 97.76%
+dev:   Loss: 1.8767 Accuracy: 97.45%
+test:  Loss: 1.8317 Accuracy: 97.40%
+0:06:06.995043s elapsed
 
 Epoch: 3 / 100:
-train: Loss: 1.4587 Accuracy: 98.00%
-dev:   Loss: 1.7761 Accuracy: 97.52%
-test:  Loss: 1.7418 Accuracy: 97.51%
-0:15:44.895017s elapsed
+train: Loss: 1.4495 Accuracy: 98.01%
+dev:   Loss: 1.7596 Accuracy: 97.57%
+test:  Loss: 1.7215 Accuracy: 97.52%
+0:06:05.480401s elapsed
 
 Epoch: 4 / 100:
-train: Loss: 1.3166 Accuracy: 98.16%
-dev:   Loss: 1.7136 Accuracy: 97.60%
-test:  Loss: 1.6769 Accuracy: 97.63%
-0:15:47.931274s elapsed
+train: Loss: 1.2968 Accuracy: 98.17%
+dev:   Loss: 1.6775 Accuracy: 97.64%
+test:  Loss: 1.6419 Accuracy: 97.63%
+0:06:07.346938s elapsed
 
 Epoch: 5 / 100:
-train: Loss: 1.2034 Accuracy: 98.28%
-dev:   Loss: 1.6855 Accuracy: 97.61%
-test:  Loss: 1.6098 Accuracy: 97.71%
-0:15:50.140411s elapsed
+train: Loss: 1.2002 Accuracy: 98.27%
+dev:   Loss: 1.6682 Accuracy: 97.64%
+test:  Loss: 1.6357 Accuracy: 97.66%
+0:06:13.152793s elapsed
 
 Epoch: 6 / 100:
-train: Loss: 1.1219 Accuracy: 98.35%
-dev:   Loss: 1.7096 Accuracy: 97.63%
-test:  Loss: 1.6510 Accuracy: 97.63%
-0:14:00.043502s elapsed
+train: Loss: 1.1217 Accuracy: 98.36%
+dev:   Loss: 1.6663 Accuracy: 97.60%
+test:  Loss: 1.6393 Accuracy: 97.66%
+0:05:53.846216s elapsed
 
 Epoch: 7 / 100:
-train: Loss: 1.0373 Accuracy: 98.46%
-dev:   Loss: 1.6791 Accuracy: 97.70%
-test:  Loss: 1.6352 Accuracy: 97.68%
-0:13:55.501231s elapsed
+train: Loss: 1.0171 Accuracy: 98.51%
+dev:   Loss: 1.6599 Accuracy: 97.68%
+test:  Loss: 1.6356 Accuracy: 97.61%
+0:06:00.341407s elapsed
 
 Epoch: 8 / 100:
-train: Loss: 0.9728 Accuracy: 98.56%
-dev:   Loss: 1.6889 Accuracy: 97.64%
-test:  Loss: 1.6587 Accuracy: 97.60%
-0:13:54.425002s elapsed
+train: Loss: 0.9535 Accuracy: 98.56%
+dev:   Loss: 1.6644 Accuracy: 97.65%
+test:  Loss: 1.6243 Accuracy: 97.65%
+0:06:00.570265s elapsed
 
 Epoch: 9 / 100:
-train: Loss: 0.8915 Accuracy: 98.66%
-dev:   Loss: 1.6710 Accuracy: 97.68%
-test:  Loss: 1.6460 Accuracy: 97.64%
-0:13:49.747100s elapsed
+train: Loss: 0.8742 Accuracy: 98.69%
+dev:   Loss: 1.6572 Accuracy: 97.73%
+test:  Loss: 1.6328 Accuracy: 97.65%
+0:05:56.826010s elapsed
 
 Epoch: 10 / 100:
-train: Loss: 0.8199 Accuracy: 98.77%
-dev:   Loss: 1.6960 Accuracy: 97.61%
-test:  Loss: 1.6688 Accuracy: 97.68%
-0:15:25.024373s elapsed
+train: Loss: 0.8268 Accuracy: 98.74%
+dev:   Loss: 1.7061 Accuracy: 97.63%
+test:  Loss: 1.6871 Accuracy: 97.65%
+0:06:00.713598s elapsed
 
 Epoch: 11 / 100:
-train: Loss: 0.7680 Accuracy: 98.81%
-dev:   Loss: 1.6926 Accuracy: 97.68%
-test:  Loss: 1.6714 Accuracy: 97.65%
-0:15:59.234582s elapsed
+train: Loss: 0.7464 Accuracy: 98.87%
+dev:   Loss: 1.6886 Accuracy: 97.69%
+test:  Loss: 1.6815 Accuracy: 97.67%
+0:05:54.535607s elapsed
 
 Epoch: 12 / 100:
-train: Loss: 0.7189 Accuracy: 98.90%
-dev:   Loss: 1.7604 Accuracy: 97.62%
-test:  Loss: 1.7346 Accuracy: 97.65%
-0:15:55.100429s elapsed
+train: Loss: 0.7248 Accuracy: 98.91%
+dev:   Loss: 1.7836 Accuracy: 97.59%
+test:  Loss: 1.7344 Accuracy: 97.64%
+0:05:56.000457s elapsed
 
 Epoch: 13 / 100:
-train: Loss: 0.6759 Accuracy: 98.97%
-dev:   Loss: 1.8455 Accuracy: 97.56%
-test:  Loss: 1.7796 Accuracy: 97.65%
-0:15:56.398106s elapsed
+train: Loss: 0.6408 Accuracy: 99.05%
+dev:   Loss: 1.7629 Accuracy: 97.65%
+test:  Loss: 1.7020 Accuracy: 97.71%
+0:05:59.510836s elapsed
 
 Epoch: 14 / 100:
-train: Loss: 0.6100 Accuracy: 99.08%
-dev:   Loss: 1.8380 Accuracy: 97.61%
-test:  Loss: 1.8196 Accuracy: 97.57%
-0:15:40.907069s elapsed
+train: Loss: 0.6159 Accuracy: 99.06%
+dev:   Loss: 1.8407 Accuracy: 97.65%
+test:  Loss: 1.7948 Accuracy: 97.59%
+0:05:56.593960s elapsed
 
 Epoch: 15 / 100:
-train: Loss: 0.5605 Accuracy: 99.15%
-dev:   Loss: 1.8517 Accuracy: 97.64%
-test:  Loss: 1.8368 Accuracy: 97.59%
-0:13:45.452818s elapsed
+train: Loss: 0.5497 Accuracy: 99.20%
+dev:   Loss: 1.8228 Accuracy: 97.62%
+test:  Loss: 1.7956 Accuracy: 97.59%
+0:06:01.979911s elapsed
 
 Epoch: 16 / 100:
-train: Loss: 0.5265 Accuracy: 99.20%
-dev:   Loss: 1.9110 Accuracy: 97.62%
-test:  Loss: 1.8382 Accuracy: 97.61%
-0:13:42.556462s elapsed
+train: Loss: 0.5215 Accuracy: 99.22%
+dev:   Loss: 1.8835 Accuracy: 97.60%
+test:  Loss: 1.8236 Accuracy: 97.62%
+0:06:01.345029s elapsed
 
 Epoch: 17 / 100:
-train: Loss: 0.4963 Accuracy: 99.25%
-dev:   Loss: 1.9757 Accuracy: 97.61%
-test:  Loss: 1.9285 Accuracy: 97.55%
-0:13:52.008618s elapsed
+train: Loss: 0.4740 Accuracy: 99.30%
+dev:   Loss: 1.8959 Accuracy: 97.63%
+test:  Loss: 1.8740 Accuracy: 97.55%
+0:05:58.495324s elapsed
 
-max accuracy of dev is 97.70% at epoch 7
-the accuracy of test at epoch 7 is 97.68%
-mean time of each epoch is 0:14:56.871264s
-4:14:06.811492s elapsed
+Epoch: 18 / 100:
+train: Loss: 0.4483 Accuracy: 99.35%
+dev:   Loss: 1.9737 Accuracy: 97.56%
+test:  Loss: 1.9240 Accuracy: 97.54%
+0:05:58.435964s elapsed
+
+Epoch: 19 / 100:
+train: Loss: 0.4095 Accuracy: 99.41%
+dev:   Loss: 2.0196 Accuracy: 97.54%
+test:  Loss: 1.9358 Accuracy: 97.58%
+0:05:53.156770s elapsed
+
+max score of dev is 97.73% at epoch 9
+the score of test at epoch 9 is 97.65%
+mean time of each epoch is 0:06:00.764362s
+1:54:14.522883s elapsed

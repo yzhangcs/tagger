@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import torch
-import torch.nn as nn
-import torch.optim as optim
+from torch import nn
 from torch.nn.utils.rnn import (pack_padded_sequence, pad_packed_sequence,
                                 pad_sequence)
 
-from modules import CRF, CharLSTM, ScalarMix
+from modules import CRF, ScalarMix
 
 
 class ELMO_LSTM_CRF(nn.Module):
@@ -61,9 +60,8 @@ class ELMO_LSTM_CRF(nn.Module):
         x, y, elmo = zip(
             *sorted(data, key=lambda x: len(x[0]), reverse=True)
         )
-        max_len = len(x[0])
-        x = pad_sequence(x, True)[:, :max_len]
-        y = pad_sequence(y, True)[:, :max_len]
-        elmo = pad_sequence(elmo, True)[:, :max_len]
+        x = pad_sequence(x, True).cuda()
+        y = pad_sequence(y, True).cuda()
+        elmo = pad_sequence(elmo, True).cuda()
 
         return x, y, elmo

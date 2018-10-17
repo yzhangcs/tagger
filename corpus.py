@@ -13,8 +13,8 @@ class Corpus(object):
     UNK = '<UNK>'
 
     def __init__(self, fdata, fembed):
-        # 获取数据的句子、词汇、词性和字符
-        self.sents, self.words, self.tags, self.chars = self.parse_sents(fdata)
+        # 获取数据的词汇、词性和字符
+        self.words, self.tags, self.chars = self.parse_sents(fdata)
         # 增加填充词汇和未知词汇
         self.words = [self.PAD, self.UNK] + self.words
         # 增加填充字符和未知字符
@@ -36,8 +36,6 @@ class Corpus(object):
         # 未知字符索引
         self.unk_ci = self.cdict[self.UNK]
 
-        # 句子数量
-        self.n_sents = len(self.sents)
         # 词汇数量
         self.n_words = len(self.words)
         # 词性数量
@@ -50,7 +48,6 @@ class Corpus(object):
 
     def __repr__(self):
         info = f"{self.__class__.__name__}(\n"
-        info += f"{'':2}num of sentences: {self.n_sents}\n"
         info += f"{'':2}num of words: {self.n_words}\n"
         info += f"{'':2}num of tags: {self.n_tags}\n"
         info += f"{'':2}num of chars: {self.n_chars}\n"
@@ -106,10 +103,15 @@ class Corpus(object):
         tags = sorted(set(t for tagseq in tagseqs for t in tagseq))
         chars = sorted(set(''.join(words)))
 
-        return sents, words, tags, chars
+        return words, tags, chars
 
-    def parse_embed(self, fembed):
+    def parse_embed(self, fembed, unk='unk'):
         words, embed = zip(*get_embed(fembed))
+        words = list(words)
+        for i, word in enumerate(words):
+            if word == unk:
+                words[i] = self.UNK
+                break
         # 扩充词汇
         self.extend(words)
         # 初始化词嵌入

@@ -65,8 +65,13 @@ class CHAR_LSTM_CRF(nn.Module):
         x, y, char_x = zip(
             *sorted(data, key=lambda x: len(x[0]), reverse=True)
         )
-        x = pad_sequence(x, True).cuda()
-        y = pad_sequence(y, True).cuda()
-        char_x = pad_sequence(char_x, True).cuda()
+        x = pad_sequence(x, True)
+        y = pad_sequence(y, True)
+        char_x = pad_sequence(char_x, True)
+
+        if torch.cuda.is_available():
+            x = x.cuda()
+            y = y.cuda()
+            char_x = char_x.cuda()
 
         return x, y, char_x

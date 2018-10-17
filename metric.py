@@ -25,7 +25,7 @@ class Metric(object):
 
     @property
     def score(self):
-        raise NotImplementedError
+        raise AttributeError
 
 
 class AccuracyMethod(Metric):

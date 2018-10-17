@@ -63,4 +63,9 @@ class ELMO_LSTM_CRF(nn.Module):
         y = pad_sequence(y, True).cuda()
         elmo = pad_sequence(elmo, True).cuda()
 
+        if torch.cuda.is_available():
+            x = x.cuda()
+            y = y.cuda()
+            elmo = elmo.cuda()
+
         return x, y, elmo

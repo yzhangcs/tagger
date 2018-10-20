@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import torch
-from torch import nn
-from torch.nn import functional as F
+import torch.nn as nn
+import torch.nn.functional as F
 
 
 class ScalarMix(nn.Module):

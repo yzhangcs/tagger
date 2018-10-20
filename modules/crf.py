@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import torch
-from torch import nn
+import torch.nn as nn
 
 
 class CRF(nn.Module):
@@ -22,10 +22,9 @@ class CRF(nn.Module):
         self.reset_parameters()
 
     def reset_parameters(self):
-        bias = (6. / self.n_tags) ** 0.5
-        nn.init.uniform_(self.trans, -bias, bias)
-        nn.init.uniform_(self.strans, -bias, bias)
-        nn.init.uniform_(self.etrans, -bias, bias)
+        nn.init.zeros_(self.trans)
+        nn.init.zeros_(self.strans)
+        nn.init.zeros_(self.etrans)
 
     def forward(self, emit, target, mask):
         T, B, N = emit.shape

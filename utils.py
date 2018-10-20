@@ -4,7 +4,7 @@ import os
 
 import h5py
 import torch
-from torch import nn
+import torch.nn as nn
 
 
 def init_embedding(embed):

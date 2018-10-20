@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import torch
-from torch import nn
+import torch.nn as nn
 from torch.nn.utils.rnn import (pack_padded_sequence, pad_packed_sequence,
                                 pad_sequence)
 
@@ -34,6 +34,16 @@ class CHAR_LSTM_CRF(nn.Module):
         self.crf = CRF(n_out)
 
         self.drop = nn.Dropout(drop)
+
+        # 初始化权重
+        self.apply(self.init_weights)
+
+    def init_weights(self, m):
+        if type(m) == nn.Linear:
+            nn.init.xavier_normal_(m.weight)
+        if type(m) == nn.Embedding:
+            bias = (3. / m.weight.size(1)) ** 0.5
+            nn.init.uniform_(m.weight, -bias, bias)
 
     def load_pretrained(self, embed):
         self.embed = nn.Embedding.from_pretrained(embed, False)

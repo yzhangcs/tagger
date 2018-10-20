@@ -4,10 +4,9 @@ import argparse
 import os
 
 import torch
-from torch import nn
+import torch.nn as nn
 
 import config
-import utils
 from corpus import Corpus
 from dataset import TextDataset
 from models import CHAR_LSTM_CRF, ELMO_LSTM_CRF

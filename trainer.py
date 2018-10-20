@@ -3,8 +3,10 @@
 from datetime import datetime, timedelta
 
 import torch
-from torch import nn, optim
+import torch.nn as nn
+import torch.optim as optim
 from torch.utils.data import DataLoader
+from tqdm import tqdm
 
 from metric import AccuracyMethod, SpanF1Method
 
@@ -73,7 +75,7 @@ class Trainer(object):
         self.model.train()
 
         # 从加载器中加载数据进行训练
-        for x, y, char_x in loader:
+        for x, y, char_x in tqdm(loader, ncols=1):
             # 清除梯度
             self.optimizer.zero_grad()
             # 获取掩码

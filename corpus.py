@@ -71,8 +71,8 @@ class Corpus(object):
                      else self.wdict.get(w.lower(), self.unk_index)
                      for w in wordseq]
             tiseq = [self.tdict.get(t, 0) for t in tagseq]
-            x.append(torch.tensor(wiseq, dtype=torch.long).cuda())
-            y.append(torch.tensor(tiseq, dtype=torch.long).cuda())
+            x.append(torch.tensor(wiseq, dtype=torch.long))
+            y.append(torch.tensor(tiseq, dtype=torch.long))
             char_x.append(torch.tensor([
                 [self.cdict.get(c, self.unk_index) for c in w[:max_len]] +
                 [0] * (max_len - len(w))

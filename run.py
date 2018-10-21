@@ -36,8 +36,6 @@ if __name__ == '__main__':
                         help='set the learning rate of training')
     parser.add_argument('--threads', '-t', action='store', default=4, type=int,
                         help='set the max num of threads')
-    parser.add_argument('--device', '-d', action='store', default=-1, type=int,
-                        help='set the id of GPU to use')
     parser.add_argument('--seed', '-s', action='store', default=1, type=int,
                         help='set the seed for generating random numbers')
     parser.add_argument('--device', '-d', action='store', default='-1',

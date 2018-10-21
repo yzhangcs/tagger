@@ -63,10 +63,10 @@ class Corpus(object):
         self.n_chars = len(self.chars)
 
     def load(self, fdata, use_char=False, max_len=20):
-        sents = get_sentences(fdata)
+        sentences = get_sentences(fdata)
         x, char_x, y = [], [], []
 
-        for wordseq, tagseq in sents:
+        for wordseq, tagseq in sentences:
             wiseq = [self.wdict[w] if w in self.wdict
                      else self.wdict.get(w.lower(), self.unk_index)
                      for w in wordseq]
@@ -83,8 +83,8 @@ class Corpus(object):
         return inputs, y
 
     def parse_sents(self, fdata, min_freq=1):
-        sents = get_sentences(fdata)
-        wordseqs, tagseqs = zip(*sents)
+        sentences = get_sentences(fdata)
+        wordseqs, tagseqs = zip(*sentences)
         words = Counter(w for wordseq in wordseqs for w in wordseq)
         words = sorted(w for w, f in words.items() if f > min_freq)
         chars = sorted(set(''.join(words)))

@@ -10,8 +10,9 @@ from modules import CRF, CharLSTM
 
 class CHAR_LSTM_CRF(nn.Module):
 
-    def __init__(self, n_char, n_char_embed, n_char_out,
-                 n_vocab, n_embed, n_hidden, n_out, drop=0.5):
+    def __init__(self, n_vocab, n_embed,
+                 n_char, n_char_embed, n_char_out,
+                 n_hidden, n_out, drop=0.5):
         super(CHAR_LSTM_CRF, self).__init__()
 
         self.embed = nn.Embedding(n_vocab, n_embed)
@@ -40,7 +41,7 @@ class CHAR_LSTM_CRF(nn.Module):
 
     def init_weights(self, m):
         if type(m) == nn.Linear:
-            nn.init.xavier_normal_(m.weight)
+            nn.init.xavier_uniform_(m.weight)
         if type(m) == nn.Embedding:
             bias = (3. / m.weight.size(1)) ** 0.5
             nn.init.uniform_(m.weight, -bias, bias)

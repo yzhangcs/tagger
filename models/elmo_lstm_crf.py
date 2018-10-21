@@ -9,7 +9,7 @@ from modules import CRF, ScalarMix
 
 class ELMO_LSTM_CRF(nn.Module):
 
-    def __init__(self, n_elmo, n_vocab, n_embed, n_hidden, n_out, drop=0.5):
+    def __init__(self, n_vocab, n_embed, n_elmo, n_hidden, n_out, drop=0.5):
         super(ELMO_LSTM_CRF, self).__init__()
 
         self.embed = nn.Embedding(n_vocab, n_embed)

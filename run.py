@@ -122,10 +122,10 @@ if __name__ == '__main__':
     print(f"{model}\n")
 
     trainer = Trainer(model=model, corpus=corpus, task=args.task)
-    trainer.fit(train_loader=train_loader,
-                dev_loader=dev_loader,
-                test_loader=test_loader,
-                epochs=args.epochs,
-                patience=args.patience,
-                lr=args.lr,
-                file=args.file)
+    trainer.train(train_loader=train_loader,
+                  dev_loader=dev_loader,
+                  test_loader=test_loader,
+                  epochs=args.epochs,
+                  patience=args.patience,
+                  lr=args.lr,
+                  file=args.file)

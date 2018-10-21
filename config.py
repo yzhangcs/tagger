@@ -27,5 +27,5 @@ class ELMO_LSTM_CRF_Config(Config):
 
 config = {
     'char_lstm_crf': CHAR_LSTM_CRF_Config,
-    'elmo_lstm_crf': ELMO_LSTM_CRF_Config,
+    'elmo_lstm_crf': ELMO_LSTM_CRF_Config
 }

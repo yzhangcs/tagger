@@ -22,10 +22,9 @@ class CRF(nn.Module):
         self.reset_parameters()
 
     def reset_parameters(self):
-        bias = (6. / self.n_tags) ** 0.5
-        nn.init.uniform_(self.trans, -bias, bias)
-        nn.init.uniform_(self.strans, -bias, bias)
-        nn.init.uniform_(self.etrans, -bias, bias)
+        nn.init.zeros_(self.trans)
+        nn.init.zeros_(self.strans)
+        nn.init.zeros_(self.etrans)
 
     def forward(self, emit, target, mask):
         T, B, N = emit.shape
@@ -93,6 +92,6 @@ class CRF(nn.Module):
                 prev = paths[j, i, prev]
                 predict.append(prev)
             # 反转预测序列并保存
-            predicts.append(torch.tensor(predict).flip(0))
+            predicts.append(torch.tensor(predict, device=emit.device).flip(0))
 
         return predicts

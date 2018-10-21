@@ -2,11 +2,9 @@
 
 import torch
 import torch.nn as nn
-import torch.optim as optim
-from torch.nn.utils.rnn import (pack_padded_sequence, pad_packed_sequence,
-                                pad_sequence)
+from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 
-from modules import CRF, CharLSTM, ScalarMix
+from modules import CRF, ScalarMix
 
 
 class ELMO_LSTM_CRF(nn.Module):
@@ -32,11 +30,20 @@ class ELMO_LSTM_CRF(nn.Module):
 
         self.drop = nn.Dropout(drop)
 
+        # 初始化权重
+        self.apply(self.init_weights)
+
+    def init_weights(self, m):
+        if type(m) == nn.Linear:
+            nn.init.xavier_normal_(m.weight)
+        if type(m) == nn.Embedding:
+            bias = (3. / m.weight.size(1)) ** 0.5
+            nn.init.uniform_(m.weight, -bias, bias)
+
     def load_pretrained(self, embed):
         self.embed = nn.Embedding.from_pretrained(embed, False)
 
     def forward(self, x, elmo):
-        B, T = x.shape
         # 获取掩码
         mask = x.gt(0)
         # 获取句子长度
@@ -56,14 +63,3 @@ class ELMO_LSTM_CRF(nn.Module):
         x = self.hid(x)
 
         return self.out(x)
-
-    def collate_fn(self, data):
-        x, y, elmo = zip(
-            *sorted(data, key=lambda x: len(x[0]), reverse=True)
-        )
-        max_len = len(x[0])
-        x = pad_sequence(x, True)[:, :max_len]
-        y = pad_sequence(y, True)[:, :max_len]
-        elmo = pad_sequence(elmo, True)[:, :max_len]
-
-        return x, y, elmo

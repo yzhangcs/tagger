@@ -1,13 +1,27 @@
 # -*- coding: utf-8 -*-
 
+import torch
+from torch.nn.utils.rnn import pad_sequence
 from torch.utils.data import Dataset
 
 from utils import get_elmo
 
 
+def collate_fn(data):
+    reprs = zip(
+        *sorted(data, key=lambda x: len(x[0]), reverse=True)
+    )
+    reprs = (pad_sequence(i, True) for i in reprs)
+
+    if torch.cuda.is_available():
+        reprs = (i.cuda() for i in reprs)
+
+    return reprs
+
+
 class TextDataset(Dataset):
 
-    def __init__(self, fdata, corpus, use_char=False, use_elmo=False):
+    def __init__(self, fdata, corpus, use_char, use_elmo):
         super(TextDataset, self).__init__()
 
         self.fdata = fdata
@@ -22,9 +36,8 @@ class TextDataset(Dataset):
 
     def get_items(self, use_char, use_elmo):
         reprs = self.corpus.load(self.fdata, use_char)
-        if not use_elmo:
-            items = list(zip(*reprs))
-        else:
-            items = list(zip(*reprs, get_elmo(self.fdata)))
+        if use_elmo:
+            reprs.append(get_elmo(self.fdata))
+        items = list(zip(*reprs))
 
         return items

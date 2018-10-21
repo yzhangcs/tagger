@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 
 import argparse
+import os
 
 import torch
 import torch.nn as nn
+from torch.utils.data import DataLoader
 
 import config
-import utils
 from corpus import Corpus
-from dataset import TextDataset
+from dataset import TextDataset, collate_fn
 from models import CHAR_LSTM_CRF, ELMO_LSTM_CRF
 from trainer import Trainer
 
@@ -22,17 +23,15 @@ if __name__ == '__main__':
                         help='choose the model for Sequence Labeling')
     parser.add_argument('--task',  default='ner',
                         choices=['chunking', 'ner', 'pos'],
-                        help='choose the model for Sequence Labeling')
-    parser.add_argument('--crf', action='store_true', default=False,
-                        help='use crf')
+                        help='choose the task of Sequence Labeling')
     parser.add_argument('--drop', action='store', default=0.5, type=float,
                         help='set the prob of dropout')
     parser.add_argument('--batch_size', action='store', default=50, type=int,
                         help='set the size of batch')
     parser.add_argument('--epochs', action='store', default=100, type=int,
                         help='set the max num of epochs')
-    parser.add_argument('--interval', action='store', default=10, type=int,
-                        help='set the max interval to stop')
+    parser.add_argument('--patience', action='store', default=10, type=int,
+                        help='set the num of epochs to be patient')
     parser.add_argument('--lr', action='store', default=0.001, type=float,
                         help='set the learning rate of training')
     parser.add_argument('--threads', '-t', action='store', default=4, type=int,
@@ -41,6 +40,8 @@ if __name__ == '__main__':
                         help='set the id of GPU to use')
     parser.add_argument('--seed', '-s', action='store', default=1, type=int,
                         help='set the seed for generating random numbers')
+    parser.add_argument('--device', '-d', action='store', default='-1',
+                        help='set which device to use')
     parser.add_argument('--file', '-f', action='store', default='model.pt',
                         help='set where to store the model')
     args = parser.parse_args()
@@ -50,8 +51,7 @@ if __name__ == '__main__':
     torch.set_num_threads(args.threads)
     torch.manual_seed(args.seed)
 
-    if args.device >= 0:
-        torch.cuda.set_device(args.device)
+    os.environ['CUDA_VISIBLE_DEVICES'] = args.device
 
     # 根据模型读取配置
     config = config.config[args.model]
@@ -74,12 +74,20 @@ if __name__ == '__main__':
                           corpus=corpus,
                           use_char=config.use_char,
                           use_elmo=config.use_elmo)
+    # 设置数据加载器
+    train_loader = DataLoader(dataset=trainset,
+                              batch_size=args.batch_size,
+                              shuffle=True,
+                              collate_fn=collate_fn)
+    dev_loader = DataLoader(dataset=devset,
+                            batch_size=args.batch_size,
+                            collate_fn=collate_fn)
+    test_loader = DataLoader(dataset=testset,
+                             batch_size=args.batch_size,
+                             collate_fn=collate_fn)
     print(f"{'':2}size of trainset: {len(trainset)}")
     print(f"{'':2}size of devset: {len(devset)}")
     print(f"{'':2}size of testset: {len(testset)}")
-
-    # 设置随机数种子
-    torch.manual_seed(args.seed)
 
     print("Create Neural Network")
     if args.model == 'char_lstm_crf':
@@ -111,16 +119,15 @@ if __name__ == '__main__':
                               n_out=corpus.n_tags,
                               drop=args.drop)
     model.load_pretrained(corpus.embed)
-    if args.device >= 0:
+    if torch.cuda.is_available():
         model = model.cuda()
     print(f"{model}\n")
 
     trainer = Trainer(model=model, corpus=corpus, task=args.task)
-    trainer.fit(trainset=trainset,
-                devset=devset,
-                testset=testset,
-                batch_size=args.batch_size,
+    trainer.fit(train_loader=train_loader,
+                dev_loader=dev_loader,
+                test_loader=test_loader,
                 epochs=args.epochs,
-                interval=args.interval,
+                patience=args.patience,
                 lr=args.lr,
                 file=args.file)

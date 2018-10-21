@@ -64,7 +64,7 @@ class Corpus(object):
 
     def load(self, fdata, use_char=False, max_len=20):
         sents = get_sentences(fdata)
-        x, y, char_x = [], [], []
+        x, char_x, y = [], [], []
 
         for wordseq, tagseq in sents:
             wiseq = [self.wdict[w] if w in self.wdict
@@ -72,15 +72,15 @@ class Corpus(object):
                      for w in wordseq]
             tiseq = [self.tdict.get(t, 0) for t in tagseq]
             x.append(torch.tensor(wiseq, dtype=torch.long))
-            y.append(torch.tensor(tiseq, dtype=torch.long))
             char_x.append(torch.tensor([
                 [self.cdict.get(c, self.unk_index) for c in w[:max_len]] +
                 [0] * (max_len - len(w))
                 for w in wordseq
             ]))
-        reprs = [x, y] if not use_char else [x, y, char_x]
+            y.append(torch.tensor(tiseq, dtype=torch.long))
+        inputs = [x] if not use_char else [x, char_x]
 
-        return reprs
+        return inputs, y
 
     def parse_sents(self, fdata, min_freq=1):
         sents = get_sentences(fdata)

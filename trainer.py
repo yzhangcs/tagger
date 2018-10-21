@@ -62,7 +62,7 @@ class Trainer(object):
         self.model.train()
 
         # 从加载器中加载数据进行训练
-        for x, y, char_x in loader:
+        for x, char_x, y in loader:
             # 清除梯度
             self.optimizer.zero_grad()
             # 获取掩码
@@ -91,7 +91,7 @@ class Trainer(object):
             metric = SpanF1Method(self.corpus.tags)
 
         # 从加载器中加载数据进行评价
-        for x, y, char_x in loader:
+        for x, char_x, y in loader:
             mask = x.gt(0)
             lens = mask.sum(dim=1)
             targets = torch.split(y[mask], lens.tolist())

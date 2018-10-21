@@ -35,9 +35,9 @@ class TextDataset(Dataset):
         return len(self.items)
 
     def get_items(self, use_char, use_elmo):
-        reprs = self.corpus.load(self.fdata, use_char)
+        inputs, y = self.corpus.load(self.fdata, use_char)
         if use_elmo:
-            reprs.append(get_elmo(self.fdata))
-        items = list(zip(*reprs))
+            inputs.append(get_elmo(self.fdata))
+        items = list(zip(*inputs, y))
 
         return items

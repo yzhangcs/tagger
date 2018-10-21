@@ -2,8 +2,7 @@
 
 import torch
 import torch.nn as nn
-from torch.nn.utils.rnn import (pack_padded_sequence, pad_packed_sequence,
-                                pad_sequence)
+from torch.nn.utils.rnn import pack_sequence, pad_packed_sequence
 
 from modules import CRF, CharLSTM
 
@@ -41,7 +40,7 @@ class CHAR_LSTM_CRF(nn.Module):
 
     def init_weights(self, m):
         if type(m) == nn.Linear:
-            nn.init.xavier_uniform_(m.weight)
+            nn.init.xavier_normal_(m.weight)
         if type(m) == nn.Embedding:
             bias = (3. / m.weight.size(1)) ** 0.5
             nn.init.uniform_(m.weight, -bias, bias)
@@ -55,17 +54,15 @@ class CHAR_LSTM_CRF(nn.Module):
         # 获取句子长度
         lens = mask.sum(dim=1)
         # 获取词嵌入向量
-        x = self.embed(x)
-
+        x = self.embed(x[mask])
         # 获取字嵌入向量
         char_x = self.char_lstm(char_x[mask])
-        char_x = pad_sequence(torch.split(char_x, lens.tolist()), True)
 
         # 获取词表示与字表示的拼接
         x = torch.cat((x, char_x), dim=-1)
         x = self.drop(x)
 
-        x = pack_padded_sequence(x, lens, True)
+        x = pack_sequence(torch.split(x, lens.tolist()))
         x, _ = self.word_lstm(x)
         x, _ = pad_packed_sequence(x, True)
         x = self.hid(x)

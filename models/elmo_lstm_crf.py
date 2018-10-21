@@ -2,7 +2,7 @@
 
 import torch
 import torch.nn as nn
-from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
+from torch.nn.utils.rnn import pack_sequence, pad_packed_sequence
 
 from modules import CRF, ScalarMix
 
@@ -49,15 +49,15 @@ class ELMO_LSTM_CRF(nn.Module):
         # 获取句子长度
         lens = mask.sum(dim=1)
         # 获取词嵌入向量
-        x = self.embed(x)
+        x = self.embed(x[mask])
         # 获取ELMo
-        elmo = self.scalar_mix(elmo.permute(2, 0, 1, 3))
+        elmo = self.scalar_mix(elmo[mask].transpose(0, 1))
 
         # 获取词表示与ELMo的拼接
         x = torch.cat((x, elmo), dim=-1)
         x = self.drop(x)
 
-        x = pack_padded_sequence(x, lens, True)
+        x = pack_sequence(torch.split(x, lens.tolist()))
         x, _ = self.lstm(x)
         x, _ = pad_packed_sequence(x, True)
         x = self.hid(x)

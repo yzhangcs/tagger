@@ -18,8 +18,8 @@ class Trainer(object):
         self.corpus = corpus
         self.task = task
 
-    def train(self, train_loader, dev_loader, test_loader,
-              epochs, patience, lr, file):
+    def fit(self, train_loader, dev_loader, test_loader,
+            epochs, patience, lr, file):
         # 记录迭代时间
         total_time = timedelta()
         # 记录最大度量及对应的迭代次数

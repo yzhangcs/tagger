@@ -5,8 +5,6 @@ from datetime import datetime, timedelta
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.utils.data import DataLoader
-from tqdm import tqdm
 
 from metric import AccuracyMethod, SpanF1Method
 
@@ -20,19 +18,8 @@ class Trainer(object):
         self.corpus = corpus
         self.task = task
 
-    def fit(self, trainset, devset, testset,
-            batch_size, epochs, patience, lr, file):
-        # 设置数据加载器
-        train_loader = DataLoader(dataset=trainset,
-                                  batch_size=batch_size,
-                                  shuffle=True,
-                                  collate_fn=self.model.collate_fn)
-        dev_loader = DataLoader(dataset=devset,
-                                batch_size=batch_size,
-                                collate_fn=self.model.collate_fn)
-        test_loader = DataLoader(dataset=testset,
-                                 batch_size=batch_size,
-                                 collate_fn=self.model.collate_fn)
+    def fit(self, train_loader, dev_loader, test_loader,
+            epochs, patience, lr, file):
         # 记录迭代时间
         total_time = timedelta()
         # 记录最大度量及对应的迭代次数
@@ -75,7 +62,7 @@ class Trainer(object):
         self.model.train()
 
         # 从加载器中加载数据进行训练
-        for x, y, char_x in tqdm(loader, ncols=1):
+        for x, y, char_x in loader:
             # 清除梯度
             self.optimizer.zero_grad()
             # 获取掩码

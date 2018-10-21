@@ -5,10 +5,11 @@ import os
 
 import torch
 import torch.nn as nn
+from torch.utils.data import DataLoader
 
 import config
 from corpus import Corpus
-from dataset import TextDataset
+from dataset import TextDataset, collate_fn
 from models import CHAR_LSTM_CRF, ELMO_LSTM_CRF
 from trainer import Trainer
 
@@ -71,6 +72,17 @@ if __name__ == '__main__':
                           corpus=corpus,
                           use_char=config.use_char,
                           use_elmo=config.use_elmo)
+    # 设置数据加载器
+    train_loader = DataLoader(dataset=trainset,
+                              batch_size=args.batch_size,
+                              shuffle=True,
+                              collate_fn=collate_fn)
+    dev_loader = DataLoader(dataset=devset,
+                            batch_size=args.batch_size,
+                            collate_fn=collate_fn)
+    test_loader = DataLoader(dataset=testset,
+                             batch_size=args.batch_size,
+                             collate_fn=collate_fn)
     print(f"{'':2}size of trainset: {len(trainset)}")
     print(f"{'':2}size of devset: {len(devset)}")
     print(f"{'':2}size of testset: {len(testset)}")
@@ -110,10 +122,9 @@ if __name__ == '__main__':
     print(f"{model}\n")
 
     trainer = Trainer(model=model, corpus=corpus, task=args.task)
-    trainer.fit(trainset=trainset,
-                devset=devset,
-                testset=testset,
-                batch_size=args.batch_size,
+    trainer.fit(train_loader=train_loader,
+                dev_loader=dev_loader,
+                test_loader=test_loader,
                 epochs=args.epochs,
                 patience=args.patience,
                 lr=args.lr,

@@ -2,8 +2,7 @@
 
 import torch
 import torch.nn as nn
-from torch.nn.utils.rnn import (pack_padded_sequence, pad_packed_sequence,
-                                pad_sequence)
+from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 
 from modules import CRF, ScalarMix
 
@@ -64,18 +63,3 @@ class ELMO_LSTM_CRF(nn.Module):
         x = self.hid(x)
 
         return self.out(x)
-
-    def collate_fn(self, data):
-        x, y, elmo = zip(
-            *sorted(data, key=lambda x: len(x[0]), reverse=True)
-        )
-        x = pad_sequence(x, True).cuda()
-        y = pad_sequence(y, True).cuda()
-        elmo = pad_sequence(elmo, True).cuda()
-
-        if torch.cuda.is_available():
-            x = x.cuda()
-            y = y.cuda()
-            elmo = elmo.cuda()
-
-        return x, y, elmo

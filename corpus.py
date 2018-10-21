@@ -22,10 +22,10 @@ class Corpus(object):
 
         # 词汇字典
         self.wdict = {w: i for i, w in enumerate(self.words)}
-        # 词性字典
-        self.tdict = {t: i for i, t in enumerate(self.tags)}
         # 字符字典
         self.cdict = {c: i for i, c in enumerate(self.chars)}
+        # 词性字典
+        self.tdict = {t: i for i, t in enumerate(self.tags)}
 
         # 填充索引
         self.pad_index = 0

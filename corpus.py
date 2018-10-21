@@ -13,6 +13,11 @@ class Corpus(object):
     UNK = '<UNK>'
 
     def __init__(self, fdata, fembed):
+        # 填充索引
+        self.pad_index = 0
+        # 未知索引
+        self.unk_index = 1
+
         # 获取数据的词汇、字符和词性
         self.words, self.chars, self.tags = self.parse_sents(fdata)
         # 增加填充词汇和未知词汇
@@ -27,10 +32,8 @@ class Corpus(object):
         # 词性字典
         self.tdict = {t: i for i, t in enumerate(self.tags)}
 
-        # 填充索引
-        self.pad_index = 0
-        # 未知索引
-        self.unk_index = 1
+        # 预训练词嵌入
+        self.embed = self.parse_embed(fembed)
 
         # 词汇数量
         self.n_words = len(self.words)
@@ -38,9 +41,6 @@ class Corpus(object):
         self.n_chars = len(self.chars)
         # 词性数量
         self.n_tags = len(self.tags)
-
-        # 预训练词嵌入
-        self.embed = self.parse_embed(fembed)
 
     def __repr__(self):
         info = f"{self.__class__.__name__}(\n"

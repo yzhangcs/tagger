@@ -1,3 +1,4 @@
+nohup: ignoring input
 Set the max num of threads to 4
 Set the seed for generating random numbers to 1
 Preprocess the data
@@ -11,9 +12,9 @@ Load the dataset
   size of devset: 1000
   size of testset: 2012
 Create Neural Network
-  n_elmo: 1024
   n_vocab: 402562
   n_embed: 100
+  n_elmo: 1024
   n_hidden: 150
   n_out: 40
 
@@ -31,204 +32,258 @@ ELMO_LSTM_CRF(
 )
 
 Epoch: 1 / 100:
-train: Loss: 3.0877 Precision: 94.51% Recall: 95.54% F: 95.02%
-dev:   Loss: 3.4365 Precision: 93.77% Recall: 94.77% F: 94.26%
-test:  Loss: 3.5103 Precision: 93.93% Recall: 94.91% F: 94.42%
-0:01:18.186453s elapsed
+train: Loss: 3.0146 Precision: 94.33% Recall: 95.80% F: 95.06%
+dev:   Loss: 3.3770 Precision: 93.86% Recall: 95.37% F: 94.60%
+test:  Loss: 3.5318 Precision: 93.73% Recall: 95.17% F: 94.45%
+0:01:16.278896s elapsed
 
 Epoch: 2 / 100:
-train: Loss: 1.8768 Precision: 96.65% Recall: 97.12% F: 96.88%
-dev:   Loss: 2.5402 Precision: 95.79% Recall: 96.10% F: 95.95%
-test:  Loss: 2.7565 Precision: 95.32% Recall: 95.85% F: 95.58%
-0:01:14.509077s elapsed
+train: Loss: 1.8535 Precision: 96.63% Recall: 97.20% F: 96.91%
+dev:   Loss: 2.5760 Precision: 95.47% Recall: 96.09% F: 95.78%
+test:  Loss: 2.8280 Precision: 95.14% Recall: 95.74% F: 95.44%
+0:01:14.077611s elapsed
 
 Epoch: 3 / 100:
-train: Loss: 1.2980 Precision: 97.58% Recall: 97.97% F: 97.77%
-dev:   Loss: 2.2622 Precision: 96.12% Recall: 96.43% F: 96.28%
-test:  Loss: 2.5648 Precision: 95.60% Recall: 95.90% F: 95.75%
-0:01:16.899467s elapsed
+train: Loss: 1.2174 Precision: 97.71% Recall: 98.16% F: 97.93%
+dev:   Loss: 2.1793 Precision: 96.15% Recall: 96.59% F: 96.37%
+test:  Loss: 2.6127 Precision: 95.52% Recall: 95.95% F: 95.74%
+0:01:16.897301s elapsed
 
 Epoch: 4 / 100:
-train: Loss: 0.8948 Precision: 98.28% Recall: 98.51% F: 98.39%
-dev:   Loss: 2.1856 Precision: 96.24% Recall: 96.45% F: 96.34%
-test:  Loss: 2.4857 Precision: 95.75% Recall: 96.22% F: 95.98%
-0:01:17.390581s elapsed
+train: Loss: 0.8464 Precision: 98.47% Recall: 98.63% F: 98.55%
+dev:   Loss: 2.0955 Precision: 96.50% Recall: 96.58% F: 96.54%
+test:  Loss: 2.5309 Precision: 95.93% Recall: 96.12% F: 96.03%
+0:01:14.989705s elapsed
 
 Epoch: 5 / 100:
-train: Loss: 0.6318 Precision: 98.91% Recall: 99.02% F: 98.96%
-dev:   Loss: 2.1275 Precision: 96.58% Recall: 96.73% F: 96.66%
-test:  Loss: 2.4919 Precision: 96.00% Recall: 96.29% F: 96.14%
-0:01:15.796524s elapsed
+train: Loss: 0.6106 Precision: 98.88% Recall: 99.01% F: 98.94%
+dev:   Loss: 2.0849 Precision: 96.44% Recall: 96.55% F: 96.49%
+test:  Loss: 2.5173 Precision: 96.03% Recall: 96.16% F: 96.10%
+0:01:15.021425s elapsed
 
 Epoch: 6 / 100:
-train: Loss: 0.4359 Precision: 99.18% Recall: 99.32% F: 99.25%
-dev:   Loss: 2.0123 Precision: 96.67% Recall: 96.82% F: 96.75%
-test:  Loss: 2.5270 Precision: 95.96% Recall: 96.29% F: 96.13%
-0:01:15.236471s elapsed
+train: Loss: 0.4088 Precision: 99.23% Recall: 99.33% F: 99.28%
+dev:   Loss: 2.0676 Precision: 96.58% Recall: 96.66% F: 96.62%
+test:  Loss: 2.6067 Precision: 96.11% Recall: 96.25% F: 96.18%
+0:01:17.237728s elapsed
 
 Epoch: 7 / 100:
-train: Loss: 0.3171 Precision: 99.48% Recall: 99.52% F: 99.50%
-dev:   Loss: 2.0550 Precision: 96.74% Recall: 96.82% F: 96.78%
-test:  Loss: 2.5533 Precision: 96.28% Recall: 96.33% F: 96.31%
-0:01:16.776545s elapsed
+train: Loss: 0.2840 Precision: 99.50% Recall: 99.54% F: 99.52%
+dev:   Loss: 2.0398 Precision: 96.69% Recall: 96.87% F: 96.78%
+test:  Loss: 2.6468 Precision: 96.09% Recall: 96.32% F: 96.20%
+0:01:14.071247s elapsed
 
 Epoch: 8 / 100:
-train: Loss: 0.2317 Precision: 99.62% Recall: 99.65% F: 99.63%
-dev:   Loss: 2.1554 Precision: 96.86% Recall: 96.56% F: 96.71%
-test:  Loss: 2.7284 Precision: 96.32% Recall: 96.24% F: 96.28%
-0:01:14.142988s elapsed
+train: Loss: 0.2105 Precision: 99.66% Recall: 99.69% F: 99.68%
+dev:   Loss: 2.0913 Precision: 96.61% Recall: 96.83% F: 96.72%
+test:  Loss: 2.6656 Precision: 96.12% Recall: 96.32% F: 96.22%
+0:01:13.131282s elapsed
 
 Epoch: 9 / 100:
-train: Loss: 0.1464 Precision: 99.77% Recall: 99.79% F: 99.78%
-dev:   Loss: 2.1582 Precision: 96.75% Recall: 96.79% F: 96.77%
-test:  Loss: 2.6489 Precision: 96.19% Recall: 96.35% F: 96.27%
-0:01:15.194499s elapsed
+train: Loss: 0.1393 Precision: 99.79% Recall: 99.80% F: 99.79%
+dev:   Loss: 2.1486 Precision: 96.72% Recall: 96.74% F: 96.73%
+test:  Loss: 2.7937 Precision: 96.30% Recall: 96.34% F: 96.32%
+0:01:16.311751s elapsed
 
 Epoch: 10 / 100:
-train: Loss: 0.1185 Precision: 99.84% Recall: 99.85% F: 99.84%
-dev:   Loss: 2.3598 Precision: 96.92% Recall: 96.68% F: 96.80%
-test:  Loss: 2.8762 Precision: 96.41% Recall: 96.25% F: 96.33%
-0:01:15.545803s elapsed
+train: Loss: 0.1052 Precision: 99.84% Recall: 99.87% F: 99.86%
+dev:   Loss: 2.2588 Precision: 96.67% Recall: 96.78% F: 96.72%
+test:  Loss: 2.9207 Precision: 96.18% Recall: 96.41% F: 96.29%
+0:01:13.313189s elapsed
 
 Epoch: 11 / 100:
-train: Loss: 0.0875 Precision: 99.89% Recall: 99.89% F: 99.89%
-dev:   Loss: 2.3095 Precision: 96.76% Recall: 96.81% F: 96.78%
-test:  Loss: 2.8847 Precision: 96.16% Recall: 96.34% F: 96.25%
-0:01:16.810914s elapsed
+train: Loss: 0.0744 Precision: 99.91% Recall: 99.92% F: 99.92%
+dev:   Loss: 2.2413 Precision: 96.78% Recall: 96.99% F: 96.88%
+test:  Loss: 2.9597 Precision: 96.15% Recall: 96.43% F: 96.29%
+0:01:15.236075s elapsed
 
 Epoch: 12 / 100:
-train: Loss: 0.0626 Precision: 99.91% Recall: 99.91% F: 99.91%
-dev:   Loss: 2.2565 Precision: 96.99% Recall: 96.92% F: 96.95%
-test:  Loss: 2.9444 Precision: 96.30% Recall: 96.37% F: 96.33%
-0:01:23.614477s elapsed
+train: Loss: 0.0611 Precision: 99.91% Recall: 99.92% F: 99.92%
+dev:   Loss: 2.4157 Precision: 96.78% Recall: 96.87% F: 96.83%
+test:  Loss: 3.0907 Precision: 96.19% Recall: 96.34% F: 96.26%
+0:01:13.438479s elapsed
 
 Epoch: 13 / 100:
-train: Loss: 0.0509 Precision: 99.94% Recall: 99.94% F: 99.94%
-dev:   Loss: 2.4257 Precision: 96.79% Recall: 96.83% F: 96.81%
-test:  Loss: 3.0729 Precision: 96.18% Recall: 96.31% F: 96.24%
-0:01:14.001065s elapsed
+train: Loss: 0.0459 Precision: 99.93% Recall: 99.93% F: 99.93%
+dev:   Loss: 2.3888 Precision: 96.69% Recall: 96.78% F: 96.74%
+test:  Loss: 3.2121 Precision: 96.21% Recall: 96.40% F: 96.30%
+0:01:14.934308s elapsed
 
 Epoch: 14 / 100:
-train: Loss: 0.0372 Precision: 99.96% Recall: 99.96% F: 99.96%
-dev:   Loss: 2.3535 Precision: 96.83% Recall: 96.93% F: 96.88%
-test:  Loss: 3.0614 Precision: 96.25% Recall: 96.47% F: 96.36%
-0:01:14.901408s elapsed
+train: Loss: 0.0387 Precision: 99.95% Recall: 99.95% F: 99.95%
+dev:   Loss: 2.4262 Precision: 96.71% Recall: 96.84% F: 96.77%
+test:  Loss: 3.1630 Precision: 96.27% Recall: 96.47% F: 96.37%
+0:01:14.778959s elapsed
 
 Epoch: 15 / 100:
-train: Loss: 0.0328 Precision: 99.97% Recall: 99.97% F: 99.97%
-dev:   Loss: 2.4506 Precision: 96.91% Recall: 97.09% F: 97.00%
-test:  Loss: 3.1165 Precision: 96.09% Recall: 96.34% F: 96.22%
-0:01:15.198934s elapsed
+train: Loss: 0.0285 Precision: 99.97% Recall: 99.96% F: 99.97%
+dev:   Loss: 2.4397 Precision: 96.96% Recall: 96.87% F: 96.92%
+test:  Loss: 3.3075 Precision: 96.21% Recall: 96.29% F: 96.25%
+0:01:14.847045s elapsed
 
 Epoch: 16 / 100:
-train: Loss: 0.0238 Precision: 99.97% Recall: 99.97% F: 99.97%
-dev:   Loss: 2.4761 Precision: 96.83% Recall: 96.97% F: 96.90%
-test:  Loss: 3.1339 Precision: 96.14% Recall: 96.41% F: 96.27%
-0:01:13.955424s elapsed
+train: Loss: 0.0356 Precision: 99.96% Recall: 99.95% F: 99.95%
+dev:   Loss: 2.5274 Precision: 96.91% Recall: 96.96% F: 96.93%
+test:  Loss: 3.4270 Precision: 96.21% Recall: 96.22% F: 96.21%
+0:01:15.032440s elapsed
 
 Epoch: 17 / 100:
-train: Loss: 0.0187 Precision: 99.99% Recall: 99.99% F: 99.99%
-dev:   Loss: 2.4888 Precision: 96.95% Recall: 96.96% F: 96.95%
-test:  Loss: 3.1961 Precision: 96.19% Recall: 96.35% F: 96.27%
-0:01:15.872805s elapsed
+train: Loss: 0.0217 Precision: 99.98% Recall: 99.99% F: 99.98%
+dev:   Loss: 2.5414 Precision: 96.94% Recall: 96.93% F: 96.94%
+test:  Loss: 3.4257 Precision: 96.26% Recall: 96.41% F: 96.34%
+0:01:13.851401s elapsed
 
 Epoch: 18 / 100:
-train: Loss: 0.0184 Precision: 99.98% Recall: 99.98% F: 99.98%
-dev:   Loss: 2.5366 Precision: 96.80% Recall: 96.81% F: 96.80%
-test:  Loss: 3.3153 Precision: 96.21% Recall: 96.29% F: 96.25%
-0:01:14.928245s elapsed
+train: Loss: 0.0183 Precision: 99.98% Recall: 99.98% F: 99.98%
+dev:   Loss: 2.4968 Precision: 96.81% Recall: 96.93% F: 96.87%
+test:  Loss: 3.3678 Precision: 96.26% Recall: 96.50% F: 96.38%
+0:01:14.931337s elapsed
 
 Epoch: 19 / 100:
-train: Loss: 0.0187 Precision: 99.97% Recall: 99.98% F: 99.98%
-dev:   Loss: 2.5455 Precision: 96.97% Recall: 96.98% F: 96.98%
-test:  Loss: 3.4349 Precision: 96.19% Recall: 96.26% F: 96.22%
-0:01:14.576992s elapsed
+train: Loss: 0.0147 Precision: 99.98% Recall: 99.99% F: 99.98%
+dev:   Loss: 2.5443 Precision: 96.81% Recall: 96.94% F: 96.87%
+test:  Loss: 3.4632 Precision: 96.24% Recall: 96.47% F: 96.36%
+0:01:18.183713s elapsed
 
 Epoch: 20 / 100:
-train: Loss: 0.0214 Precision: 99.98% Recall: 99.97% F: 99.98%
-dev:   Loss: 2.4834 Precision: 97.02% Recall: 96.97% F: 97.00%
-test:  Loss: 3.3469 Precision: 96.28% Recall: 96.26% F: 96.27%
-0:01:16.117700s elapsed
+train: Loss: 0.0160 Precision: 99.99% Recall: 99.98% F: 99.98%
+dev:   Loss: 2.5088 Precision: 96.88% Recall: 96.78% F: 96.83%
+test:  Loss: 3.4989 Precision: 96.26% Recall: 96.30% F: 96.28%
+0:01:15.016193s elapsed
 
 Epoch: 21 / 100:
-train: Loss: 0.0136 Precision: 99.99% Recall: 99.99% F: 99.99%
-dev:   Loss: 2.4222 Precision: 97.01% Recall: 97.07% F: 97.04%
-test:  Loss: 3.3466 Precision: 96.22% Recall: 96.34% F: 96.28%
-0:01:16.039125s elapsed
+train: Loss: 0.0106 Precision: 99.99% Recall: 99.99% F: 99.99%
+dev:   Loss: 2.6215 Precision: 96.66% Recall: 96.78% F: 96.72%
+test:  Loss: 3.5097 Precision: 96.27% Recall: 96.48% F: 96.38%
+0:01:13.764490s elapsed
 
 Epoch: 22 / 100:
-train: Loss: 0.0152 Precision: 99.98% Recall: 99.98% F: 99.98%
-dev:   Loss: 2.5128 Precision: 96.77% Recall: 96.98% F: 96.88%
-test:  Loss: 3.4271 Precision: 96.07% Recall: 96.30% F: 96.18%
-0:01:15.153789s elapsed
+train: Loss: 0.0122 Precision: 99.98% Recall: 99.99% F: 99.98%
+dev:   Loss: 2.5239 Precision: 96.83% Recall: 96.85% F: 96.84%
+test:  Loss: 3.4780 Precision: 96.36% Recall: 96.47% F: 96.42%
+0:01:12.230246s elapsed
 
 Epoch: 23 / 100:
-train: Loss: 0.0134 Precision: 99.98% Recall: 99.98% F: 99.98%
-dev:   Loss: 2.5586 Precision: 97.13% Recall: 97.14% F: 97.13%
-test:  Loss: 3.5016 Precision: 96.27% Recall: 96.44% F: 96.35%
-0:01:14.809565s elapsed
+train: Loss: 0.0106 Precision: 99.99% Recall: 99.99% F: 99.99%
+dev:   Loss: 2.6875 Precision: 96.71% Recall: 96.83% F: 96.77%
+test:  Loss: 3.5944 Precision: 96.33% Recall: 96.55% F: 96.44%
+0:01:15.629830s elapsed
 
 Epoch: 24 / 100:
-train: Loss: 0.0122 Precision: 99.99% Recall: 99.99% F: 99.99%
-dev:   Loss: 2.5537 Precision: 97.12% Recall: 96.89% F: 97.01%
-test:  Loss: 3.5153 Precision: 96.33% Recall: 96.24% F: 96.28%
-0:01:16.611652s elapsed
+train: Loss: 0.0093 Precision: 99.99% Recall: 99.99% F: 99.99%
+dev:   Loss: 2.7027 Precision: 96.80% Recall: 96.87% F: 96.83%
+test:  Loss: 3.5705 Precision: 96.38% Recall: 96.54% F: 96.46%
+0:01:15.345707s elapsed
 
 Epoch: 25 / 100:
-train: Loss: 0.0134 Precision: 99.98% Recall: 99.98% F: 99.98%
-dev:   Loss: 2.5828 Precision: 96.99% Recall: 96.81% F: 96.90%
-test:  Loss: 3.5290 Precision: 96.25% Recall: 96.18% F: 96.21%
-0:01:14.241866s elapsed
+train: Loss: 0.0111 Precision: 99.99% Recall: 99.99% F: 99.99%
+dev:   Loss: 2.6321 Precision: 96.98% Recall: 96.96% F: 96.97%
+test:  Loss: 3.5544 Precision: 96.33% Recall: 96.44% F: 96.38%
+0:01:15.341604s elapsed
 
 Epoch: 26 / 100:
-train: Loss: 0.0094 Precision: 99.98% Recall: 99.98% F: 99.98%
-dev:   Loss: 2.7436 Precision: 96.87% Recall: 97.05% F: 96.96%
-test:  Loss: 3.6013 Precision: 96.16% Recall: 96.42% F: 96.29%
-0:01:16.994081s elapsed
+train: Loss: 0.0173 Precision: 99.99% Recall: 99.98% F: 99.98%
+dev:   Loss: 2.6384 Precision: 97.01% Recall: 96.97% F: 96.99%
+test:  Loss: 3.6142 Precision: 96.44% Recall: 96.46% F: 96.45%
+0:01:12.501868s elapsed
 
 Epoch: 27 / 100:
-train: Loss: 0.0104 Precision: 99.99% Recall: 99.99% F: 99.99%
-dev:   Loss: 2.7020 Precision: 96.98% Recall: 96.86% F: 96.92%
-test:  Loss: 3.4902 Precision: 96.23% Recall: 96.32% F: 96.27%
-0:01:13.751372s elapsed
+train: Loss: 0.0098 Precision: 99.99% Recall: 99.99% F: 99.99%
+dev:   Loss: 2.5742 Precision: 96.84% Recall: 96.93% F: 96.89%
+test:  Loss: 3.5286 Precision: 96.38% Recall: 96.52% F: 96.45%
+0:01:14.912216s elapsed
 
 Epoch: 28 / 100:
-train: Loss: 0.0104 Precision: 99.98% Recall: 99.98% F: 99.98%
-dev:   Loss: 2.5504 Precision: 97.02% Recall: 96.85% F: 96.93%
-test:  Loss: 3.4870 Precision: 96.33% Recall: 96.29% F: 96.31%
-0:01:13.873820s elapsed
+train: Loss: 0.0097 Precision: 99.99% Recall: 99.99% F: 99.99%
+dev:   Loss: 2.6660 Precision: 97.00% Recall: 96.98% F: 96.99%
+test:  Loss: 3.6453 Precision: 96.40% Recall: 96.45% F: 96.43%
+0:01:15.710730s elapsed
 
 Epoch: 29 / 100:
-train: Loss: 0.0119 Precision: 99.98% Recall: 99.98% F: 99.98%
-dev:   Loss: 2.5495 Precision: 96.99% Recall: 97.16% F: 97.08%
-test:  Loss: 3.3690 Precision: 96.38% Recall: 96.54% F: 96.46%
-0:01:17.480296s elapsed
+train: Loss: 0.0087 Precision: 99.99% Recall: 99.99% F: 99.99%
+dev:   Loss: 2.6516 Precision: 96.92% Recall: 96.95% F: 96.94%
+test:  Loss: 3.6894 Precision: 96.31% Recall: 96.48% F: 96.39%
+0:01:13.287791s elapsed
 
 Epoch: 30 / 100:
-train: Loss: 0.0078 Precision: 99.99% Recall: 99.99% F: 99.99%
-dev:   Loss: 2.5661 Precision: 97.04% Recall: 97.11% F: 97.08%
-test:  Loss: 3.5350 Precision: 96.39% Recall: 96.36% F: 96.37%
-0:01:14.900008s elapsed
+train: Loss: 0.0091 Precision: 99.98% Recall: 99.98% F: 99.98%
+dev:   Loss: 2.6612 Precision: 97.04% Recall: 97.08% F: 97.06%
+test:  Loss: 3.7688 Precision: 96.23% Recall: 96.30% F: 96.26%
+0:01:14.662453s elapsed
 
 Epoch: 31 / 100:
-train: Loss: 0.0078 Precision: 99.99% Recall: 99.99% F: 99.99%
-dev:   Loss: 2.6827 Precision: 96.97% Recall: 96.98% F: 96.97%
-test:  Loss: 3.6253 Precision: 96.22% Recall: 96.29% F: 96.26%
-0:01:15.843182s elapsed
+train: Loss: 0.0069 Precision: 99.99% Recall: 99.99% F: 99.99%
+dev:   Loss: 2.6602 Precision: 97.09% Recall: 96.96% F: 97.03%
+test:  Loss: 3.6803 Precision: 96.34% Recall: 96.27% F: 96.30%
+0:01:14.586909s elapsed
 
 Epoch: 32 / 100:
-train: Loss: 0.0055 Precision: 99.99% Recall: 99.99% F: 99.99%
-dev:   Loss: 2.6330 Precision: 97.13% Recall: 97.00% F: 97.06%
-test:  Loss: 3.5353 Precision: 96.41% Recall: 96.39% F: 96.40%
-0:01:14.438380s elapsed
+train: Loss: 0.0071 Precision: 99.99% Recall: 99.99% F: 99.99%
+dev:   Loss: 2.5589 Precision: 97.09% Recall: 97.08% F: 97.08%
+test:  Loss: 3.6811 Precision: 96.31% Recall: 96.37% F: 96.34%
+0:01:13.557936s elapsed
 
 Epoch: 33 / 100:
-train: Loss: 0.0070 Precision: 99.99% Recall: 99.99% F: 99.99%
-dev:   Loss: 2.7327 Precision: 96.97% Recall: 96.89% F: 96.93%
-test:  Loss: 3.5897 Precision: 96.45% Recall: 96.46% F: 96.45%
-0:01:15.850008s elapsed
+train: Loss: 0.0075 Precision: 99.99% Recall: 99.99% F: 99.99%
+dev:   Loss: 2.6363 Precision: 96.94% Recall: 96.92% F: 96.93%
+test:  Loss: 3.6710 Precision: 96.34% Recall: 96.34% F: 96.34%
+0:01:15.319743s elapsed
 
-max score of dev is 97.13% at epoch 23
-the score of test at epoch 23 is 96.35%
-mean time of each epoch is 0:01:15.746773s
-0:41:39.643516s elapsed
+Epoch: 34 / 100:
+train: Loss: 0.0058 Precision: 99.99% Recall: 99.99% F: 99.99%
+dev:   Loss: 2.6276 Precision: 97.02% Recall: 97.01% F: 97.01%
+test:  Loss: 3.7270 Precision: 96.35% Recall: 96.43% F: 96.39%
+0:01:15.059750s elapsed
+
+Epoch: 35 / 100:
+train: Loss: 0.0085 Precision: 99.99% Recall: 99.98% F: 99.98%
+dev:   Loss: 2.7492 Precision: 97.00% Recall: 96.82% F: 96.91%
+test:  Loss: 3.6412 Precision: 96.51% Recall: 96.40% F: 96.46%
+0:01:15.426218s elapsed
+
+Epoch: 36 / 100:
+train: Loss: 0.0077 Precision: 99.99% Recall: 99.99% F: 99.99%
+dev:   Loss: 2.5572 Precision: 96.82% Recall: 96.97% F: 96.90%
+test:  Loss: 3.7087 Precision: 96.31% Recall: 96.46% F: 96.38%
+0:01:14.270273s elapsed
+
+Epoch: 37 / 100:
+train: Loss: 0.0059 Precision: 99.99% Recall: 99.99% F: 99.99%
+dev:   Loss: 2.6833 Precision: 96.88% Recall: 96.96% F: 96.92%
+test:  Loss: 3.7863 Precision: 96.39% Recall: 96.40% F: 96.40%
+0:01:13.477852s elapsed
+
+Epoch: 38 / 100:
+train: Loss: 0.0063 Precision: 99.99% Recall: 99.99% F: 99.99%
+dev:   Loss: 2.7532 Precision: 97.03% Recall: 96.92% F: 96.97%
+test:  Loss: 3.7353 Precision: 96.36% Recall: 96.32% F: 96.34%
+0:01:16.726605s elapsed
+
+Epoch: 39 / 100:
+train: Loss: 0.0077 Precision: 99.99% Recall: 99.99% F: 99.99%
+dev:   Loss: 2.8014 Precision: 96.96% Recall: 96.89% F: 96.93%
+test:  Loss: 3.8896 Precision: 96.30% Recall: 96.32% F: 96.31%
+0:01:11.358083s elapsed
+
+Epoch: 40 / 100:
+train: Loss: 0.0088 Precision: 99.99% Recall: 99.98% F: 99.98%
+dev:   Loss: 2.7243 Precision: 96.76% Recall: 96.67% F: 96.72%
+test:  Loss: 3.7096 Precision: 96.41% Recall: 96.37% F: 96.39%
+0:01:15.330659s elapsed
+
+Epoch: 41 / 100:
+train: Loss: 0.0072 Precision: 99.99% Recall: 99.98% F: 99.98%
+dev:   Loss: 2.7160 Precision: 96.85% Recall: 96.77% F: 96.81%
+test:  Loss: 3.7218 Precision: 96.35% Recall: 96.25% F: 96.30%
+0:01:14.803442s elapsed
+
+Epoch: 42 / 100:
+train: Loss: 0.0064 Precision: 99.99% Recall: 99.99% F: 99.99%
+dev:   Loss: 2.8189 Precision: 96.96% Recall: 96.99% F: 96.97%
+test:  Loss: 3.7257 Precision: 96.44% Recall: 96.54% F: 96.49%
+0:01:15.081609s elapsed
+
+max score of dev is 97.08% at epoch 32
+the score of test at epoch 32 is 96.34%
+mean time of each epoch is 0:01:14.761098s
+0:52:19.966099s elapsed

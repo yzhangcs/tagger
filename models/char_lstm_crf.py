@@ -40,7 +40,7 @@ class CHAR_LSTM_CRF(nn.Module):
 
     def init_weights(self, m):
         if type(m) == nn.Linear:
-            nn.init.xavier_normal_(m.weight)
+            nn.init.xavier_uniform_(m.weight)
         if type(m) == nn.Embedding:
             bias = (3. / m.weight.size(1)) ** 0.5
             nn.init.uniform_(m.weight, -bias, bias)

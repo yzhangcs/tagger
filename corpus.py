@@ -63,8 +63,8 @@ class Corpus(object):
         self.n_chars = len(self.chars)
 
     def load(self, fdata, use_char=False, max_len=20):
-        sentences = get_sentences(fdata)
         x, char_x, y = [], [], []
+        sentences = get_sentences(fdata)
 
         for wordseq, tagseq in sentences:
             wiseq = [self.wdict[w] if w in self.wdict

@@ -4,8 +4,6 @@ import torch
 from torch.nn.utils.rnn import pad_sequence
 from torch.utils.data import Dataset
 
-from utils import get_elmo
-
 
 def collate_fn(data):
     reprs = zip(
@@ -21,23 +19,13 @@ def collate_fn(data):
 
 class TextDataset(Dataset):
 
-    def __init__(self, fdata, corpus, use_char, use_elmo):
+    def __init__(self, items):
         super(TextDataset, self).__init__()
 
-        self.fdata = fdata
-        self.corpus = corpus
-        self.items = self.get_items(use_char, use_elmo)
+        self.items = items
 
     def __getitem__(self, index):
-        return self.items[index]
+        return tuple(item[index] for item in self.items)
 
     def __len__(self):
-        return len(self.items)
-
-    def get_items(self, use_char, use_elmo):
-        inputs, y = self.corpus.load(self.fdata, use_char)
-        if use_elmo:
-            inputs.append(get_elmo(self.fdata))
-        items = list(zip(*inputs, y))
-
-        return items
+        return len(self.items[0])

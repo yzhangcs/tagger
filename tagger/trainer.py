@@ -6,16 +6,16 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
-from metric import AccuracyMethod, SpanF1Method
+from tagger.metric import AccuracyMethod, SpanF1Method
 
 
 class Trainer(object):
 
-    def __init__(self, model, corpus, task):
+    def __init__(self, model, vocab, task):
         super(Trainer, self).__init__()
 
         self.model = model
-        self.corpus = corpus
+        self.vocab = vocab
         self.task = task
 
     def fit(self, train_loader, dev_loader, test_loader,
@@ -88,7 +88,7 @@ class Trainer(object):
         if self.task == 'pos':
             metric = AccuracyMethod()
         else:
-            metric = SpanF1Method(self.corpus.tags)
+            metric = SpanF1Method(self.vocab.tags)
 
         # 从加载器中加载数据进行评价
         for x, char_x, y in loader:

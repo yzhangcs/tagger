@@ -4,14 +4,13 @@ import argparse
 import os
 
 import torch
-import torch.nn as nn
 from torch.utils.data import DataLoader
 
 import config
-from corpus import Corpus
-from dataset import TextDataset, collate_fn
-from models import CHAR_LSTM_CRF, ELMO_LSTM_CRF
-from trainer import Trainer
+from tagger import Trainer
+from tagger.data import Corpus, Embedding, TextDataset, Vocab, collate_fn
+from tagger.models import CHAR_LSTM_CRF, ELMO_LSTM_CRF
+from tagger.utils import init_embedding, numericalize
 
 if __name__ == '__main__':
     # 解析命令参数
@@ -55,23 +54,29 @@ if __name__ == '__main__':
     config = config.config[args.model]
 
     print("Preprocess the data")
-    # 建立语料
-    corpus = Corpus(config.ftrain, config.fembed)
-    print(corpus)
+    train = Corpus(filename=config.ftrain)
+    dev = Corpus(filename=config.fdev)
+    test = Corpus(filename=config.ftest)
+    embed = Embedding(filename=config.fembed)
+    vocab = Vocab.from_corpus(corpus=train, min_freq=2)
+    vocab.read_embeddings(embed=embed,
+                          unk='unk',
+                          init_unk=init_embedding)
+    print(vocab)
 
     print("Load the dataset")
-    trainset = TextDataset(fdata=config.ftrain,
-                           corpus=corpus,
-                           use_char=config.use_char,
-                           use_elmo=config.use_elmo)
-    devset = TextDataset(fdata=config.fdev,
-                         corpus=corpus,
-                         use_char=config.use_char,
-                         use_elmo=config.use_elmo)
-    testset = TextDataset(fdata=config.ftest,
-                          corpus=corpus,
-                          use_char=config.use_char,
-                          use_elmo=config.use_elmo)
+    trainset = TextDataset(numericalize(vocab=vocab,
+                                        corpus=train,
+                                        use_char=config.use_char,
+                                        use_elmo=config.use_elmo))
+    devset = TextDataset(numericalize(vocab=vocab,
+                                      corpus=dev,
+                                      use_char=config.use_char,
+                                      use_elmo=config.use_elmo))
+    testset = TextDataset(numericalize(vocab=vocab,
+                                       corpus=test,
+                                       use_char=config.use_char,
+                                       use_elmo=config.use_elmo))
     # 设置数据加载器
     train_loader = DataLoader(dataset=trainset,
                               batch_size=args.batch_size,
@@ -89,39 +94,39 @@ if __name__ == '__main__':
 
     print("Create Neural Network")
     if args.model == 'char_lstm_crf':
-        print(f"{'':2}n_vocab: {corpus.n_words}\n"
+        print(f"{'':2}n_vocab: {vocab.n_words}\n"
               f"{'':2}n_embed: {config.n_embed}\n"
-              f"{'':2}n_char: {corpus.n_chars}\n"
+              f"{'':2}n_char: {vocab.n_chars}\n"
               f"{'':2}n_char_embed: {config.n_char_embed}\n"
               f"{'':2}n_char_out: {config.n_char_out}\n"
               f"{'':2}n_hidden: {config.n_hidden}\n"
-              f"{'':2}n_out: {corpus.n_tags}\n")
-        model = CHAR_LSTM_CRF(n_vocab=corpus.n_words,
+              f"{'':2}n_out: {vocab.n_tags}\n")
+        model = CHAR_LSTM_CRF(n_vocab=vocab.n_words,
                               n_embed=config.n_embed,
-                              n_char=corpus.n_chars,
+                              n_char=vocab.n_chars,
                               n_char_embed=config.n_char_embed,
                               n_char_out=config.n_char_out,
                               n_hidden=config.n_hidden,
-                              n_out=corpus.n_tags,
+                              n_out=vocab.n_tags,
                               drop=args.drop)
     elif args.model == 'elmo_lstm_crf':
-        print(f"{'':2}n_vocab: {corpus.n_words}\n"
+        print(f"{'':2}n_vocab: {vocab.n_words}\n"
               f"{'':2}n_embed: {config.n_embed}\n"
               f"{'':2}n_elmo: {config.n_elmo}\n"
               f"{'':2}n_hidden: {config.n_hidden}\n"
-              f"{'':2}n_out: {corpus.n_tags}\n")
-        model = ELMO_LSTM_CRF(n_vocab=corpus.n_words,
+              f"{'':2}n_out: {vocab.n_tags}\n")
+        model = ELMO_LSTM_CRF(n_vocab=vocab.n_words,
                               n_embed=config.n_embed,
                               n_elmo=config.n_elmo,
                               n_hidden=config.n_hidden,
-                              n_out=corpus.n_tags,
+                              n_out=vocab.n_tags,
                               drop=args.drop)
-    model.load_pretrained(corpus.embed)
+    model.load_pretrained(vocab.embeddings)
     if torch.cuda.is_available():
         model = model.cuda()
     print(f"{model}\n")
 
-    trainer = Trainer(model=model, corpus=corpus, task=args.task)
+    trainer = Trainer(model=model, vocab=vocab, task=args.task)
     trainer.fit(train_loader=train_loader,
                 dev_loader=dev_loader,
                 test_loader=test_loader,

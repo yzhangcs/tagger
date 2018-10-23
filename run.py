@@ -13,7 +13,6 @@ from tagger.models import CHAR_LSTM_CRF, ELMO_LSTM_CRF
 from tagger.utils import init_embedding, numericalize
 
 if __name__ == '__main__':
-    # 解析命令参数
     parser = argparse.ArgumentParser(
         description='Create several models for Sequence Labeling.'
     )
@@ -59,9 +58,7 @@ if __name__ == '__main__':
     test = Corpus(filename=config.ftest)
     embed = Embedding(filename=config.fembed)
     vocab = Vocab.from_corpus(corpus=train, min_freq=2)
-    vocab.read_embeddings(embed=embed,
-                          unk='unk',
-                          init_unk=init_embedding)
+    vocab.read_embeddings(embed=embed, unk='unk', init_unk=init_embedding)
     print(vocab)
 
     print("Load the dataset")

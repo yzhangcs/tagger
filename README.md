@@ -5,6 +5,7 @@ Models used for Sequence Labeling
 ## Requirements
 
 ```txt
+allennlp == 0.7.0
 python == 3.7.0
 pytorch == 0.4.1
 ```
@@ -93,7 +94,7 @@ ELMO_LSTM_CRF(
 * Pretrained: [glove.6B.100d.txt](https://nlp.stanford.edu/projects/glove/).
 * Dataset: CoNLL-2003
 
-|               |  Dev   |  Test  |     mT(s)      |
+|               | Dev    | Test   | mT(s)          |
 | :-----------: | :----: | :----: | :------------: |
 | CHAR_LSTM_CRF | 94.49% | 90.72% | 0:01:50.889580 |
 | ELMO_LSTM_CRF | 95.64% | 92.09% | 0:01:46.960411 |
@@ -103,7 +104,7 @@ ELMO_LSTM_CRF(
 * Pretrained: [glove.6B.100d.txt](https://nlp.stanford.edu/projects/glove/).
 * Dataset: CoNLL-2000
 
-|               |  Dev   |  Test  |     mT(s)      |
+|               | Dev    | Test   | mT(s)          |
 | :-----------: | :----: | :----: | :------------: |
 | CHAR_LSTM_CRF | 95.02% | 94.51% | 0:01:21.141716 |
 | ELMO_LSTM_CRF | 97.08% | 96.34% | 0:01:14.761098 |
@@ -113,7 +114,7 @@ ELMO_LSTM_CRF(
 * Pretrained: [glove.6B.100d.txt](https://nlp.stanford.edu/projects/glove/).
 * Dataset: WSJ
 
-|               |  Dev   |  Test  |     mT(s)      |
+|               | Dev    | Test   | mT(s)          |
 | :-----------: | :----: | :----: | :------------: |
 | CHAR_LSTM_CRF | 97.68% | 97.64% | 0:05:59.462637 |
 | ELMO_LSTM_CRF | 97.86% | 97.81% | 0:05:55.335100 |

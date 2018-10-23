@@ -14,28 +14,29 @@ class CHAR_LSTM_CRF(nn.Module):
                  n_hidden, n_out, drop=0.5):
         super(CHAR_LSTM_CRF, self).__init__()
 
+        # the embedding layer
         self.embed = nn.Embedding(n_vocab, n_embed)
-        # 字嵌入LSTM层
+        # the char-lstm layer
         self.char_lstm = CharLSTM(n_char=n_char,
                                   n_embed=n_char_embed,
                                   n_out=n_char_out)
 
-        # 词嵌入LSTM层
+        # the word-lstm layer
         self.word_lstm = nn.LSTM(input_size=n_embed + n_char_out,
                                  hidden_size=n_hidden,
                                  batch_first=True,
                                  bidirectional=True)
 
-        # 隐藏层
+        # the hidden layer
         self.hid = nn.Sequential(nn.Linear(n_hidden * 2, n_hidden), nn.Tanh())
-        # 输出层
+        # the output layer
         self.out = nn.Linear(n_hidden, n_out)
-        # CRF层
+        # the CRF layer
         self.crf = CRF(n_out)
 
         self.drop = nn.Dropout(drop)
 
-        # 初始化权重
+        # init weights of all submodules recursively
         self.apply(self.init_weights)
 
     def init_weights(self, m):
@@ -49,16 +50,14 @@ class CHAR_LSTM_CRF(nn.Module):
         self.embed = nn.Embedding.from_pretrained(embed, False)
 
     def forward(self, x, char_x):
-        # 获取掩码
+        # get the mask and lengths of given batch
         mask = x.gt(0)
-        # 获取句子长度
         lens = mask.sum(dim=1)
-        # 获取词嵌入向量
+        # get outputs from embedding layers
         x = self.embed(x[mask])
-        # 获取字嵌入向量
         char_x = self.char_lstm(char_x[mask])
 
-        # 获取词表示与字表示的拼接
+        # concatenate the word and char representations
         x = torch.cat((x, char_x), dim=-1)
         x = self.drop(x)
 

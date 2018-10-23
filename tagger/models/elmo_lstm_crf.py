@@ -15,22 +15,22 @@ class ELMO_LSTM_CRF(nn.Module):
         self.embed = nn.Embedding(n_vocab, n_embed)
         self.scalar_mix = ScalarMix(n_reprs=3, do_layer_norm=False)
 
-        # 词嵌入LSTM层
+        # the word-lstm layer
         self.lstm = nn.LSTM(input_size=n_embed + n_elmo,
                             hidden_size=n_hidden,
                             batch_first=True,
                             bidirectional=True)
 
-        # 隐藏层
+        # the hidden layer
         self.hid = nn.Sequential(nn.Linear(n_hidden * 2, n_hidden), nn.Tanh())
-        # 输出层
+        # the output layer
         self.out = nn.Linear(n_hidden, n_out)
-        # CRF层
+        # the CRF layer
         self.crf = CRF(n_out)
 
         self.drop = nn.Dropout(drop)
 
-        # 初始化权重
+        # init weights of all submodules recursively
         self.apply(self.init_weights)
 
     def init_weights(self, m):
@@ -44,16 +44,14 @@ class ELMO_LSTM_CRF(nn.Module):
         self.embed = nn.Embedding.from_pretrained(embed, False)
 
     def forward(self, x, elmo):
-        # 获取掩码
+        # get the mask and lengths of given batch
         mask = x.gt(0)
-        # 获取句子长度
         lens = mask.sum(dim=1)
-        # 获取词嵌入向量
+        # get embeddings and elmo
         x = self.embed(x[mask])
-        # 获取ELMo
         elmo = self.scalar_mix(elmo[mask].transpose(0, 1))
 
-        # 获取词表示与ELMo的拼接
+        # concatenate all the representations
         x = torch.cat((x, elmo), dim=-1)
         x = self.drop(x)
 

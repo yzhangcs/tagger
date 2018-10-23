@@ -49,7 +49,7 @@ if __name__ == '__main__':
 
     os.environ['CUDA_VISIBLE_DEVICES'] = args.device
 
-    # 根据模型读取配置
+    # read config according to the corresponding model
     config = config.config[args.model]
 
     print("Preprocess the data")
@@ -74,7 +74,7 @@ if __name__ == '__main__':
                                        corpus=test,
                                        use_char=config.use_char,
                                        use_elmo=config.use_elmo))
-    # 设置数据加载器
+    # set the data loaders
     train_loader = DataLoader(dataset=trainset,
                               batch_size=args.batch_size,
                               shuffle=True,

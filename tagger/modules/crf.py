@@ -9,16 +9,11 @@ class CRF(nn.Module):
     def __init__(self, n_tags):
         super(CRF, self).__init__()
 
-        # 不同的词性个数
         self.n_tags = n_tags
-        # 句间迁移(FROM->TO)
-        self.trans = nn.Parameter(torch.Tensor(n_tags, n_tags))
-        # 句首迁移
+        self.trans = nn.Parameter(torch.Tensor(n_tags, n_tags))  # (FROM->TO)
         self.strans = nn.Parameter(torch.Tensor(n_tags))
-        # 句尾迁移
         self.etrans = nn.Parameter(torch.Tensor(n_tags))
 
-        # 初始化参数
         self.reset_parameters()
 
     def reset_parameters(self):
@@ -53,18 +48,17 @@ class CRF(nn.Module):
         T, B, N = emit.shape
         scores = torch.zeros(T, B, device=emit.device)
 
-        # 加上句间迁移分数
+        # plus the transition score
         scores[1:] += self.trans[target[:-1], target[1:]]
-        # 加上发射分数
+        # plus the emit score
         scores += emit.gather(dim=2, index=target.unsqueeze(2)).squeeze(2)
-        # 通过掩码过滤分数
+        # filter some scores by mask
         score = scores.masked_select(mask).sum()
 
-        # 获取序列最后的词性的索引
         ends = mask.sum(dim=0).view(1, -1) - 1
-        # 加上句首迁移分数
+        # plus the score of start transitions
         score += self.strans[target[0]].sum()
-        # 加上句尾迁移分数
+        # plus the score of end transitions
         score += self.etrans[target.gather(dim=0, index=ends)].sum()
 
         return score
@@ -91,7 +85,7 @@ class CRF(nn.Module):
             for j in reversed(range(1, length)):
                 prev = paths[j, i, prev]
                 predict.append(prev)
-            # 反转预测序列并保存
+            # flip the predicted sequence before appending it to the list
             predicts.append(torch.tensor(predict, device=emit.device).flip(0))
 
         return predicts

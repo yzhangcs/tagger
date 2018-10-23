@@ -9,9 +9,7 @@ class Vocab(object):
     UNK = '<UNK>'
 
     def __init__(self, words, tags):
-        # 填充索引
         self.pad_index = 0
-        # 未知索引
         self.unk_index = 1
 
         self.words = [self.PAD, self.UNK] + sorted(words)
@@ -75,13 +73,10 @@ class Vocab(object):
                 init_unk(self.embeddings[i])
 
     def extend(self, words):
-        # 扩展词汇和字符
         self.words.extend({w for w in words if w not in self.wdict})
         self.chars.extend({c for c in ''.join(words) if c not in self.cdict})
-        # 更新字典
         self.wdict = {w: i for i, w in enumerate(self.words)}
         self.cdict = {c: i for i, c in enumerate(self.chars)}
-        # 更新词汇和字符数
         self.n_words = len(self.words)
         self.n_chars = len(self.chars)
 

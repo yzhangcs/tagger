@@ -56,13 +56,13 @@ class AccuracyMethod(Metric):
 
 class SpanF1Method(Metric):
 
-    def __init__(self, tags, eps=1e-5):
+    def __init__(self, vocab, eps=1e-5):
         super(SpanF1Method, self).__init__()
 
         self.tp = 0.0
         self.pred = 0.0
         self.gold = 0.0
-        self.tags = tags
+        self.vocab = vocab
         self.eps = eps
 
     def __call__(self, predicts, targets):
@@ -97,11 +97,10 @@ class SpanF1Method(Metric):
 
         return 2 * precision * recall / (precision + recall + self.eps)
 
-    def get_entities(self, tiseq):
+    def get_entities(self, ids):
         span, chunks = [], []
-        tagseq = (self.tags[ti] for ti in tiseq)
 
-        for i, tag in enumerate(tagseq):
+        for i, tag in enumerate(self.vocab.id_to_tag(ids)):
             if tag == 'O':
                 stype = 'O'
             else:

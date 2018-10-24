@@ -77,7 +77,7 @@ class Trainer(object):
         if self.task == 'pos':
             metric = AccuracyMethod()
         else:
-            metric = SpanF1Method(self.vocab.tags)
+            metric = SpanF1Method(self.vocab)
 
         for x, char_x, y in loader:
             mask = x.gt(0)

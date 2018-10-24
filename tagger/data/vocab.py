@@ -56,6 +56,11 @@ class Vocab(object):
 
         return ids
 
+    def id_to_tag(self, ids):
+        tags = (self.tags[i] for i in ids)
+
+        return tags
+
     def read_embeddings(self, embed, unk=None, init_unk=nn.init.normal_):
         words = embed.words
         if unk:

@@ -51,7 +51,7 @@ class Vocab(object):
         return char_ids
 
     def tag_to_id(self, sequence):
-        ids = [self.tdict.get(token, 0) for token in sequence]
+        ids = [self.tdict.get(t, 0) for t in sequence]
         ids = torch.tensor(ids, dtype=torch.long)
 
         return ids

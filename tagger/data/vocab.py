@@ -26,9 +26,9 @@ class Vocab(object):
 
     def __repr__(self):
         info = f"{self.__class__.__name__}(\n"
-        info += f"{'':2}num of words: {self.n_words}\n"
-        info += f"{'':2}num of chars: {self.n_chars}\n"
-        info += f"{'':2}num of tags: {self.n_tags}\n"
+        info += f"  num of words: {self.n_words}\n"
+        info += f"  num of chars: {self.n_chars}\n"
+        info += f"  num of tags: {self.n_tags}\n"
         info += f")"
 
         return info

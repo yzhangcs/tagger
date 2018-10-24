@@ -85,39 +85,36 @@ if __name__ == '__main__':
     test_loader = DataLoader(dataset=testset,
                              batch_size=args.batch_size,
                              collate_fn=collate_fn)
-    print(f"{'':2}size of trainset: {len(trainset)}")
-    print(f"{'':2}size of devset: {len(devset)}")
-    print(f"{'':2}size of testset: {len(testset)}")
+    print(f"  size of trainset: {len(trainset)}")
+    print(f"  size of devset: {len(devset)}")
+    print(f"  size of testset: {len(testset)}")
 
     print("Create Neural Network")
     if args.model == 'char_lstm_crf':
-        print(f"{'':2}n_vocab: {vocab.n_words}\n"
-              f"{'':2}n_embed: {config.n_embed}\n"
-              f"{'':2}n_char: {vocab.n_chars}\n"
-              f"{'':2}n_char_embed: {config.n_char_embed}\n"
-              f"{'':2}n_char_out: {config.n_char_out}\n"
-              f"{'':2}n_hidden: {config.n_hidden}\n"
-              f"{'':2}n_out: {vocab.n_tags}\n")
-        model = CHAR_LSTM_CRF(n_vocab=vocab.n_words,
-                              n_embed=config.n_embed,
-                              n_char=vocab.n_chars,
-                              n_char_embed=config.n_char_embed,
-                              n_char_out=config.n_char_out,
-                              n_hidden=config.n_hidden,
-                              n_out=vocab.n_tags,
-                              drop=args.drop)
+        params = {
+            'n_vocab': vocab.n_words,
+            'n_embed': config.n_embed,
+            'n_char': vocab.n_chars,
+            'n_char_embed': config.n_char_embed,
+            'n_char_out': config.n_char_out,
+            'n_hidden': config.n_hidden,
+            'n_out': vocab.n_tags,
+            'drop': args.drop
+        }
+        MODEL = CHAR_LSTM_CRF
     elif args.model == 'elmo_lstm_crf':
-        print(f"{'':2}n_vocab: {vocab.n_words}\n"
-              f"{'':2}n_embed: {config.n_embed}\n"
-              f"{'':2}n_elmo: {config.n_elmo}\n"
-              f"{'':2}n_hidden: {config.n_hidden}\n"
-              f"{'':2}n_out: {vocab.n_tags}\n")
-        model = ELMO_LSTM_CRF(n_vocab=vocab.n_words,
-                              n_embed=config.n_embed,
-                              n_elmo=config.n_elmo,
-                              n_hidden=config.n_hidden,
-                              n_out=vocab.n_tags,
-                              drop=args.drop)
+        params = {
+            'n_vocab': vocab.n_words,
+            'n_embed': config.n_embed,
+            'n_elmo': config.n_elmo,
+            'n_hidden': config.n_hidden,
+            'n_out': vocab.n_tags,
+            'drop': args.drop
+        }
+        MODEL = ELMO_LSTM_CRF
+    for k, v in params.items():
+        print(f"  {k}: {v}")
+    model = MODEL(**params)
     model.load_pretrained(vocab.embeddings)
     if torch.cuda.is_available():
         model = model.cuda()

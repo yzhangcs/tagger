@@ -6,7 +6,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
-from tagger.metric import AccuracyMethod, SpanF1Method
+from tagger.metrics import AccuracyMethod, SpanF1Method
 
 
 class Trainer(object):

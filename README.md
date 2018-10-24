@@ -93,6 +93,9 @@ ELMO_LSTM_CRF(
 
 * Pretrained: [glove.6B.100d.txt](https://nlp.stanford.edu/projects/glove/).
 * Dataset: CoNLL-2003
+  * Train: 14987
+  * Dev: 3466
+  * Test: 3684
 
 |               | Dev    | Test   | mT(s)          |
 | :-----------: | :----: | :----: | :------------: |
@@ -103,6 +106,9 @@ ELMO_LSTM_CRF(
 
 * Pretrained: [glove.6B.100d.txt](https://nlp.stanford.edu/projects/glove/).
 * Dataset: CoNLL-2000
+  * Train: 7936
+  * Dev: 1000
+  * Test: 2012
 
 |               | Dev    | Test   | mT(s)          |
 | :-----------: | :----: | :----: | :------------: |
@@ -113,6 +119,9 @@ ELMO_LSTM_CRF(
 
 * Pretrained: [glove.6B.100d.txt](https://nlp.stanford.edu/projects/glove/).
 * Dataset: WSJ
+  * Train: 38219
+  * Dev: 5527
+  * Test: 5462
 
 |               | Dev    | Test   | mT(s)          |
 | :-----------: | :----: | :----: | :------------: |

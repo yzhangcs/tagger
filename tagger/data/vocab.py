@@ -89,8 +89,8 @@ class Vocab(object):
         return vocab
 
     @classmethod
-    def load(cls, filename):
-        return torch.load(filename)
+    def load(cls, fname):
+        return torch.load(fname)
 
-    def save(filename):
-        torch.save(self, filename)
+    def save(fname):
+        torch.save(self, fname)

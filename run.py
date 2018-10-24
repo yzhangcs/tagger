@@ -53,10 +53,10 @@ if __name__ == '__main__':
     config = config.config[args.model]
 
     print("Preprocess the data")
-    train = Corpus(filename=config.ftrain)
-    dev = Corpus(filename=config.fdev)
-    test = Corpus(filename=config.ftest)
-    embed = Embedding(filename=config.fembed)
+    train = Corpus(fname=config.ftrain)
+    dev = Corpus(fname=config.fdev)
+    test = Corpus(fname=config.ftest)
+    embed = Embedding(fname=config.fembed)
     vocab = Vocab.from_corpus(corpus=train, min_freq=2)
     vocab.read_embeddings(embed=embed, unk='unk', init_unk=init_embedding)
     print(vocab)

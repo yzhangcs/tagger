@@ -28,7 +28,7 @@ def numericalize(vocab, corpus, use_char, use_elmo):
     if use_char:
         items.append([vocab.char_to_id(seq) for seq in corpus.x_seqs])
     if use_elmo:
-        items.append(get_elmo(corpus.filename))
+        items.append(get_elmo(corpus.fname))
     y = [vocab.tag_to_id(seq) for seq in corpus.y_seqs]
     items.append(y)
 

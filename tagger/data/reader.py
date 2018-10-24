@@ -7,11 +7,11 @@ import torch
 
 class Corpus(object):
 
-    def __init__(self, filename):
+    def __init__(self, fname):
         super(Corpus, self).__init__()
 
-        self.filename = filename
-        self.x_seqs, self.y_seqs = self.read(filename)
+        self.fname = fname
+        self.x_seqs, self.y_seqs = self.read(fname)
 
     @property
     def words(self):
@@ -22,10 +22,10 @@ class Corpus(object):
         return Counter(t for seq in self.y_seqs for t in seq)
 
     @classmethod
-    def read(cls, filename):
+    def read(cls, fname):
         start = 0
         x_seqs, y_seqs = [], []
-        with open(filename, 'r') as f:
+        with open(fname, 'r') as f:
             lines = [line for line in f]
         for i, line in enumerate(lines):
             if len(lines[i]) <= 1:
@@ -41,11 +41,11 @@ class Corpus(object):
 
 class Embedding(object):
 
-    def __init__(self, filename):
+    def __init__(self, fname):
         super(Embedding, self).__init__()
 
-        self.filename = filename
-        self.words, self.vectors = self.read(filename)
+        self.fname = fname
+        self.words, self.vectors = self.read(fname)
         self.pretrained = {w: v for w, v in zip(self.words, self.vectors)}
 
     def __contains__(self, word):
@@ -59,8 +59,8 @@ class Embedding(object):
         return len(self.vectors[0])
 
     @classmethod
-    def read(cls, filename):
-        with open(filename, 'r') as f:
+    def read(cls, fname):
+        with open(fname, 'r') as f:
             lines = [line for line in f]
         splits = [line.split() for line in lines]
         reprs = [

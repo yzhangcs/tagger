@@ -16,6 +16,9 @@ class CRF(nn.Module):
 
         self.reset_parameters()
 
+    def extra_repr(self):
+        return f"n_tags={self.n_tags}"
+
     def reset_parameters(self):
         nn.init.zeros_(self.trans)
         nn.init.zeros_(self.strans)

@@ -4,6 +4,7 @@ import argparse
 import os
 
 import torch
+import torch.optim as optim
 from torch.utils.data import DataLoader
 
 import config
@@ -116,15 +117,18 @@ if __name__ == '__main__':
         print(f"  {k}: {v}")
     model = MODEL(**params)
     model.load_pretrained(vocab.embeddings)
+    optimizer = optim.Adam(params=model.parameters(), lr=args.lr)
     if torch.cuda.is_available():
         model = model.cuda()
     print(f"{model}\n")
 
-    trainer = Trainer(model=model, vocab=vocab, task=args.task)
+    trainer = Trainer(model=model,
+                      vocab=vocab,
+                      optimizer=optimizer,
+                      task=args.task)
     trainer.fit(train_loader=train_loader,
                 dev_loader=dev_loader,
                 test_loader=test_loader,
                 epochs=args.epochs,
                 patience=args.patience,
-                lr=args.lr,
                 file=args.file)

@@ -4,25 +4,24 @@ from datetime import datetime, timedelta
 
 import torch
 import torch.nn as nn
-import torch.optim as optim
 
 from tagger.metrics import AccuracyMethod, SpanF1Method
 
 
 class Trainer(object):
 
-    def __init__(self, model, vocab, task):
+    def __init__(self, model, vocab, optimizer, task):
         super(Trainer, self).__init__()
 
         self.model = model
         self.vocab = vocab
+        self.optimizer = optimizer
         self.task = task
 
     def fit(self, train_loader, dev_loader, test_loader,
-            epochs, patience, lr, file):
+            epochs, patience, file):
         total_time = timedelta()
         max_e, max_metric = 0, 0.0
-        self.optimizer = optim.Adam(params=self.model.parameters(), lr=lr)
 
         for epoch in range(1, epochs + 1):
             start = datetime.now()
@@ -46,7 +45,9 @@ class Trainer(object):
                 max_e, max_metric = epoch, dev_metric
             elif epoch - max_e >= patience:
                 break
-        self.model = torch.load(file).cuda()
+        self.model = torch.load(file)
+        if torch.cuda.is_available():
+            self.model = self.model.cuda()
         loss, metric = self.evaluate(test_loader)
 
         print(f"max score of dev is {max_metric.score:.2%} at epoch {max_e}")

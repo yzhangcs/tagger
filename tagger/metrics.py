@@ -37,10 +37,10 @@ class AccuracyMethod(Metric):
         self.total = 0.0
         self.eps = eps
 
-    def __call__(self, predicts, targets):
-        for predict, target in zip(predicts, targets):
-            self.tp += torch.sum(predict == target).item()
-            self.total += len(target)
+    def __call__(self, preds, golds):
+        for pred, gold in zip(preds, golds):
+            self.tp += torch.sum(pred == gold).item()
+            self.total += len(gold)
 
     def __repr__(self):
         return f"Accuracy: {self.accuracy:.2%}"
@@ -65,10 +65,10 @@ class SpanF1Method(Metric):
         self.vocab = vocab
         self.eps = eps
 
-    def __call__(self, predicts, targets):
-        for predict, target in zip(predicts, targets):
-            pred_spans = self.get_entities(predict)
-            gold_spans = self.get_entities(target)
+    def __call__(self, preds, golds):
+        for pred, gold in zip(preds, golds):
+            pred_spans = self.get_entities(pred)
+            gold_spans = self.get_entities(gold)
             self.tp += len(pred_spans & gold_spans)
             self.pred += len(pred_spans)
             self.gold += len(gold_spans)

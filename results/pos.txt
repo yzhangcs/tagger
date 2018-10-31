@@ -162,3 +162,19 @@ dev:   Loss: 2.1317 Accuracy: 97.55%
 test:  Loss: 2.1167 Accuracy: 97.54%
 0:05:54.682710s elapsed
 
+Epoch: 22 / 100:
+train: Loss: 0.2815 Accuracy: 99.63%
+dev:   Loss: 2.2042 Accuracy: 97.53%
+test:  Loss: 2.1399 Accuracy: 97.58%
+0:05:53.267925s elapsed
+
+Epoch: 23 / 100:
+train: Loss: 0.2698 Accuracy: 99.63%
+dev:   Loss: 2.2521 Accuracy: 97.56%
+test:  Loss: 2.2302 Accuracy: 97.48%
+0:05:54.183950s elapsed
+
+max score of dev is 97.69% at epoch 13
+the score of test at epoch 13 is 97.67%
+mean time of each epoch is 0:05:55.449494s
+2:16:15.338351s elapsed

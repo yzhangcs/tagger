@@ -22,23 +22,22 @@ class ELMO_LSTM_CRF(nn.Module):
                             bidirectional=True)
 
         # the hidden layer
-        self.hid = nn.Sequential(nn.Linear(n_hidden * 2, n_hidden), nn.Tanh())
+        self.hid = nn.Linear(n_hidden * 2, n_hidden)
         # the output layer
         self.out = nn.Linear(n_hidden, n_out)
         # the CRF layer
         self.crf = CRF(n_out)
 
+        self.activation = nn.Tanh()
         self.drop = nn.Dropout(drop)
 
-        # init weights of all submodules recursively
-        self.apply(self.init_weights)
-
-    def init_weights(self, m):
-        if type(m) == nn.Linear:
-            nn.init.xavier_uniform_(m.weight)
-        if type(m) == nn.Embedding:
-            bias = (3. / m.weight.size(1)) ** 0.5
-            nn.init.uniform_(m.weight, -bias, bias)
+    def reset_parameters(self):
+        # init Linear
+        nn.init.xavier_uniform_(self.hid.weight)
+        nn.init.xavier_uniform_(self.out.weight)
+        # init Embedding
+        bias = (3. / self.embed.weight.size(1)) ** 0.5
+        nn.init.uniform_(self.embed.weight, -bias, bias)
 
     def load_pretrained(self, embed):
         self.embed = nn.Embedding.from_pretrained(embed, False)
@@ -59,5 +58,6 @@ class ELMO_LSTM_CRF(nn.Module):
         x, _ = self.lstm(x)
         x, _ = pad_packed_sequence(x, True)
         x = self.hid(x)
+        x = self.activation(x)
 
         return self.out(x)

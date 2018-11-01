@@ -19,6 +19,12 @@ class CharLSTM(nn.Module):
                             batch_first=True,
                             bidirectional=True)
 
+        self.reset_parameters()
+
+    def reset_parameters(self):
+        bias = (3. / self.embed.weight.size(1)) ** 0.5
+        nn.init.uniform_(self.embed.weight, -bias, bias)
+
     def forward(self, x):
         mask = x.gt(0)
         lens, indices = torch.sort(mask.sum(dim=1), descending=True)

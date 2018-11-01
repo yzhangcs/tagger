@@ -23,12 +23,12 @@ class ELMO_LSTM_CRF(nn.Module):
 
         # the hidden layer
         self.hid = nn.Linear(n_hidden * 2, n_hidden)
+        self.activation = nn.Tanh()
         # the output layer
         self.out = nn.Linear(n_hidden, n_out)
         # the CRF layer
         self.crf = CRF(n_out)
 
-        self.activation = nn.Tanh()
         self.drop = nn.Dropout(drop)
 
     def reset_parameters(self):

@@ -75,17 +75,6 @@ if __name__ == '__main__':
                                        corpus=test,
                                        use_char=config.use_char,
                                        use_elmo=config.use_elmo))
-    # set the data loaders
-    train_loader = DataLoader(dataset=trainset,
-                              batch_size=args.batch_size,
-                              shuffle=True,
-                              collate_fn=collate_fn)
-    dev_loader = DataLoader(dataset=devset,
-                            batch_size=args.batch_size,
-                            collate_fn=collate_fn)
-    test_loader = DataLoader(dataset=testset,
-                             batch_size=args.batch_size,
-                             collate_fn=collate_fn)
     print(f"  size of trainset: {len(trainset)}")
     print(f"  size of devset: {len(devset)}")
     print(f"  size of testset: {len(testset)}")
@@ -115,12 +104,24 @@ if __name__ == '__main__':
         MODEL = ELMO_LSTM_CRF
     for k, v in params.items():
         print(f"  {k}: {v}")
+
     model = MODEL(**params)
     model.load_pretrained(vocab.embeddings)
     optimizer = optim.Adam(params=model.parameters(), lr=args.lr)
     if torch.cuda.is_available():
         model = model.cuda()
     print(f"{model}\n")
+
+    train_loader = DataLoader(dataset=trainset,
+                              batch_size=args.batch_size,
+                              shuffle=True,
+                              collate_fn=collate_fn)
+    dev_loader = DataLoader(dataset=devset,
+                            batch_size=args.batch_size,
+                            collate_fn=collate_fn)
+    test_loader = DataLoader(dataset=testset,
+                             batch_size=args.batch_size,
+                             collate_fn=collate_fn)
 
     trainer = Trainer(model=model,
                       vocab=vocab,

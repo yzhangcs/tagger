@@ -20,14 +20,12 @@ Create Neural Network
   drop: 0.5
 ELMO_LSTM_CRF(
   (embed): Embedding(405440, 100)
-  (scalar_mix): ScalarMix()
+  (scalar_mix): ScalarMix(n_reprs=3)
   (lstm): LSTM(1124, 150, batch_first=True, bidirectional=True)
-  (hid): Sequential(
-    (0): Linear(in_features=300, out_features=150, bias=True)
-    (1): Tanh()
-  )
+  (hid): Linear(in_features=300, out_features=150, bias=True)
+  (activation): Tanh()
   (out): Linear(in_features=150, out_features=17, bias=True)
-  (crf): CRF()
+  (crf): CRF(n_tags=17)
   (drop): Dropout(p=0.5)
 )
 

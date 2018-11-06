@@ -27,154 +27,122 @@ CHAR_LSTM_CRF(
     (lstm): LSTM(30, 150, batch_first=True, bidirectional=True)
   )
   (word_lstm): LSTM(400, 150, batch_first=True, bidirectional=True)
-  (hid): Sequential(
-    (0): Linear(in_features=300, out_features=150, bias=True)
-    (1): Tanh()
-  )
+  (hid): Linear(in_features=300, out_features=150, bias=True)
+  (activation): Tanh()
   (out): Linear(in_features=150, out_features=46, bias=True)
-  (crf): CRF()
+  (crf): CRF(n_tags=46)
   (drop): Dropout(p=0.5)
 )
 
 Epoch: 1 / 100:
-train: Loss: 2.0217 Accuracy: 97.42%
-dev:   Loss: 2.1771 Accuracy: 97.17%
-test:  Loss: 2.0688 Accuracy: 97.25%
-0:06:02.874538s elapsed
+train: Loss: 2.0493 Accuracy: 97.41%
+dev:   Loss: 2.1940 Accuracy: 97.20%
+test:  Loss: 2.1197 Accuracy: 97.17%
+0:06:41.862387s elapsed
 
 Epoch: 2 / 100:
-train: Loss: 1.6269 Accuracy: 97.81%
-dev:   Loss: 1.8684 Accuracy: 97.44%
-test:  Loss: 1.8192 Accuracy: 97.48%
-0:05:58.960037s elapsed
+train: Loss: 1.6253 Accuracy: 97.80%
+dev:   Loss: 1.8673 Accuracy: 97.41%
+test:  Loss: 1.8053 Accuracy: 97.47%
+0:06:42.850362s elapsed
 
 Epoch: 3 / 100:
-train: Loss: 1.4015 Accuracy: 98.06%
-dev:   Loss: 1.7070 Accuracy: 97.63%
-test:  Loss: 1.7404 Accuracy: 97.50%
-0:05:58.333831s elapsed
+train: Loss: 1.4006 Accuracy: 98.05%
+dev:   Loss: 1.7272 Accuracy: 97.61%
+test:  Loss: 1.7254 Accuracy: 97.54%
+0:06:44.131526s elapsed
 
 Epoch: 4 / 100:
-train: Loss: 1.2604 Accuracy: 98.20%
-dev:   Loss: 1.7038 Accuracy: 97.60%
-test:  Loss: 1.6802 Accuracy: 97.56%
-0:05:55.512839s elapsed
+train: Loss: 1.2612 Accuracy: 98.20%
+dev:   Loss: 1.6973 Accuracy: 97.61%
+test:  Loss: 1.6484 Accuracy: 97.61%
+0:06:40.694792s elapsed
 
 Epoch: 5 / 100:
-train: Loss: 1.1368 Accuracy: 98.34%
-dev:   Loss: 1.6477 Accuracy: 97.65%
-test:  Loss: 1.6471 Accuracy: 97.60%
-0:05:55.461733s elapsed
+train: Loss: 1.1430 Accuracy: 98.33%
+dev:   Loss: 1.6796 Accuracy: 97.67%
+test:  Loss: 1.6310 Accuracy: 97.65%
+0:06:13.912013s elapsed
 
 Epoch: 6 / 100:
-train: Loss: 1.0696 Accuracy: 98.42%
-dev:   Loss: 1.6499 Accuracy: 97.66%
-test:  Loss: 1.6746 Accuracy: 97.64%
-0:05:54.204243s elapsed
+train: Loss: 1.0680 Accuracy: 98.40%
+dev:   Loss: 1.6515 Accuracy: 97.66%
+test:  Loss: 1.6334 Accuracy: 97.65%
+0:06:43.695532s elapsed
 
 Epoch: 7 / 100:
-train: Loss: 0.9759 Accuracy: 98.54%
-dev:   Loss: 1.7009 Accuracy: 97.66%
-test:  Loss: 1.6451 Accuracy: 97.68%
-0:05:54.000795s elapsed
+train: Loss: 0.9748 Accuracy: 98.54%
+dev:   Loss: 1.6796 Accuracy: 97.69%
+test:  Loss: 1.6270 Accuracy: 97.65%
+0:06:46.375725s elapsed
 
 Epoch: 8 / 100:
-train: Loss: 0.8896 Accuracy: 98.65%
-dev:   Loss: 1.6823 Accuracy: 97.63%
-test:  Loss: 1.6680 Accuracy: 97.62%
-0:05:56.998586s elapsed
+train: Loss: 0.8887 Accuracy: 98.65%
+dev:   Loss: 1.6751 Accuracy: 97.70%
+test:  Loss: 1.6348 Accuracy: 97.67%
+0:06:46.298488s elapsed
 
 Epoch: 9 / 100:
-train: Loss: 0.8316 Accuracy: 98.72%
-dev:   Loss: 1.7400 Accuracy: 97.61%
-test:  Loss: 1.7091 Accuracy: 97.69%
-0:05:57.892049s elapsed
+train: Loss: 0.8432 Accuracy: 98.69%
+dev:   Loss: 1.7245 Accuracy: 97.63%
+test:  Loss: 1.6961 Accuracy: 97.71%
+0:06:48.994617s elapsed
 
 Epoch: 10 / 100:
-train: Loss: 0.7627 Accuracy: 98.84%
-dev:   Loss: 1.7597 Accuracy: 97.64%
-test:  Loss: 1.7103 Accuracy: 97.64%
-0:05:56.604137s elapsed
+train: Loss: 0.7683 Accuracy: 98.83%
+dev:   Loss: 1.7449 Accuracy: 97.65%
+test:  Loss: 1.6864 Accuracy: 97.67%
+0:06:23.326914s elapsed
 
 Epoch: 11 / 100:
-train: Loss: 0.6879 Accuracy: 98.96%
-dev:   Loss: 1.7147 Accuracy: 97.68%
-test:  Loss: 1.7035 Accuracy: 97.65%
-0:05:54.418867s elapsed
+train: Loss: 0.6848 Accuracy: 98.97%
+dev:   Loss: 1.7267 Accuracy: 97.67%
+test:  Loss: 1.6885 Accuracy: 97.69%
+0:06:33.840859s elapsed
 
 Epoch: 12 / 100:
-train: Loss: 0.6354 Accuracy: 99.03%
-dev:   Loss: 1.7722 Accuracy: 97.65%
-test:  Loss: 1.7486 Accuracy: 97.67%
-0:05:56.464367s elapsed
+train: Loss: 0.6420 Accuracy: 99.02%
+dev:   Loss: 1.7693 Accuracy: 97.66%
+test:  Loss: 1.7423 Accuracy: 97.70%
+0:06:44.926377s elapsed
 
 Epoch: 13 / 100:
-train: Loss: 0.5825 Accuracy: 99.13%
-dev:   Loss: 1.8108 Accuracy: 97.69%
-test:  Loss: 1.7674 Accuracy: 97.67%
-0:05:54.312758s elapsed
+train: Loss: 0.5889 Accuracy: 99.11%
+dev:   Loss: 1.8262 Accuracy: 97.62%
+test:  Loss: 1.7566 Accuracy: 97.69%
+0:06:43.948493s elapsed
 
 Epoch: 14 / 100:
-train: Loss: 0.5442 Accuracy: 99.19%
-dev:   Loss: 1.8400 Accuracy: 97.61%
-test:  Loss: 1.8533 Accuracy: 97.57%
-0:05:54.638984s elapsed
+train: Loss: 0.5425 Accuracy: 99.19%
+dev:   Loss: 1.8485 Accuracy: 97.62%
+test:  Loss: 1.8200 Accuracy: 97.62%
+0:06:48.073010s elapsed
 
 Epoch: 15 / 100:
-train: Loss: 0.4986 Accuracy: 99.26%
-dev:   Loss: 1.8850 Accuracy: 97.61%
-test:  Loss: 1.8413 Accuracy: 97.66%
-0:05:53.988127s elapsed
+train: Loss: 0.4997 Accuracy: 99.26%
+dev:   Loss: 1.9029 Accuracy: 97.63%
+test:  Loss: 1.8268 Accuracy: 97.68%
+0:06:23.413750s elapsed
 
 Epoch: 16 / 100:
-train: Loss: 0.4674 Accuracy: 99.31%
-dev:   Loss: 1.9327 Accuracy: 97.55%
-test:  Loss: 1.9029 Accuracy: 97.64%
-0:05:54.109533s elapsed
+train: Loss: 0.4697 Accuracy: 99.31%
+dev:   Loss: 1.9283 Accuracy: 97.58%
+test:  Loss: 1.8642 Accuracy: 97.63%
+0:06:08.262709s elapsed
 
 Epoch: 17 / 100:
-train: Loss: 0.4242 Accuracy: 99.39%
-dev:   Loss: 1.9536 Accuracy: 97.63%
-test:  Loss: 1.9541 Accuracy: 97.63%
-0:05:52.980542s elapsed
+train: Loss: 0.4194 Accuracy: 99.39%
+dev:   Loss: 2.0051 Accuracy: 97.61%
+test:  Loss: 1.9112 Accuracy: 97.61%
+0:06:50.834550s elapsed
 
 Epoch: 18 / 100:
-train: Loss: 0.3793 Accuracy: 99.47%
-dev:   Loss: 1.9913 Accuracy: 97.59%
-test:  Loss: 1.9934 Accuracy: 97.60%
-0:05:53.102387s elapsed
+train: Loss: 0.3787 Accuracy: 99.47%
+dev:   Loss: 2.0348 Accuracy: 97.64%
+test:  Loss: 1.9692 Accuracy: 97.56%
+0:06:41.785234s elapsed
 
-Epoch: 19 / 100:
-train: Loss: 0.3632 Accuracy: 99.48%
-dev:   Loss: 2.0278 Accuracy: 97.55%
-test:  Loss: 2.0330 Accuracy: 97.54%
-0:05:53.113312s elapsed
-
-Epoch: 20 / 100:
-train: Loss: 0.3263 Accuracy: 99.55%
-dev:   Loss: 2.1035 Accuracy: 97.55%
-test:  Loss: 2.0875 Accuracy: 97.52%
-0:05:55.232101s elapsed
-
-Epoch: 21 / 100:
-train: Loss: 0.3149 Accuracy: 99.55%
-dev:   Loss: 2.1317 Accuracy: 97.55%
-test:  Loss: 2.1167 Accuracy: 97.54%
-0:05:54.682710s elapsed
-
-Epoch: 22 / 100:
-train: Loss: 0.2815 Accuracy: 99.63%
-dev:   Loss: 2.2042 Accuracy: 97.53%
-test:  Loss: 2.1399 Accuracy: 97.58%
-0:05:53.267925s elapsed
-
-Epoch: 23 / 100:
-train: Loss: 0.2698 Accuracy: 99.63%
-dev:   Loss: 2.2521 Accuracy: 97.56%
-test:  Loss: 2.2302 Accuracy: 97.48%
-0:05:54.183950s elapsed
-
-max score of dev is 97.69% at epoch 13
-the score of test at epoch 13 is 97.67%
-mean time of each epoch is 0:05:55.449494s
-2:16:15.338351s elapsed
+max score of dev is 97.70% at epoch 8
+the score of test at epoch 8 is 97.67%
+mean time of each epoch is 0:06:38.179297s
+1:59:27.227338s elapsed

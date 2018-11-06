@@ -2,9 +2,9 @@
 
 
 class Config(object):
-    ftrain = 'data/ner/train.txt'
-    fdev = 'data/ner/dev.txt'
-    ftest = 'data/ner/test.txt'
+    ftrain = 'data/chunking/train.txt'
+    fdev = 'data/chunking/dev.txt'
+    ftest = 'data/chunking/test.txt'
     fembed = 'data/glove.6B.100d.txt'
 
 

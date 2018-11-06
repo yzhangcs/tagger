@@ -22,6 +22,13 @@ def get_elmo(fdata):
     return reprs
 
 
+def get_parser(fdata):
+    felmo = os.path.splitext(fdata)[0] + '.parser'
+    reprs = torch.load(felmo)
+
+    return reprs
+
+
 def numericalize(vocab, corpus, use_char, use_elmo):
     x = [vocab.word_to_id(seq) for seq in corpus.x_seqs]
     items = [x]

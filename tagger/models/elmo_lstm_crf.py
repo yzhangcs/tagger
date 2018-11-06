@@ -37,9 +37,6 @@ class ELMO_LSTM_CRF(nn.Module):
         # init Linear
         nn.init.xavier_uniform_(self.hid.weight)
         nn.init.xavier_uniform_(self.out.weight)
-        # init Embedding
-        bias = (3. / self.embed.weight.size(1)) ** 0.5
-        nn.init.uniform_(self.embed.weight, -bias, bias)
 
     def load_pretrained(self, embed):
         self.embed = nn.Embedding.from_pretrained(embed, False)

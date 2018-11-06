@@ -31,6 +31,8 @@ class ELMO_LSTM_CRF(nn.Module):
 
         self.drop = nn.Dropout(drop)
 
+        self.reset_parameters()
+
     def reset_parameters(self):
         # init Linear
         nn.init.xavier_uniform_(self.hid.weight)

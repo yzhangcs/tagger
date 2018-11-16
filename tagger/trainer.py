@@ -63,8 +63,6 @@ class Trainer(object):
             mask = x.gt(0)
 
             out = self.model(x, char_x)
-            out = out.transpose(0, 1)  # [T, B, N]
-            y, mask = y.t(), mask.t()  # [T, B]
             loss = self.model.crf(out, y, mask)
             loss.backward()
             nn.utils.clip_grad_norm_(self.model.parameters(), 5.0)
@@ -86,8 +84,6 @@ class Trainer(object):
             targets = torch.split(y[mask], lens.tolist())
 
             out = self.model(x, char_x)
-            out = out.transpose(0, 1)  # [T, B, N]
-            y, mask = y.t(), mask.t()  # [T, B]
             predicts = self.model.crf.viterbi(out, mask)
             loss += self.model.crf(out, y, mask)
 

@@ -64,25 +64,25 @@ CHAR_LSTM_CRF(
     (lstm): LSTM(30, 150, batch_first=True, bidirectional=True)
   )
   (word_lstm): LSTM(400, 150, batch_first=True, bidirectional=True)
-  (hid): Sequential(
-    (0): Linear(in_features=300, out_features=150, bias=True)
-    (1): Tanh()
-  )
+  (hid): Linear(in_features=300, out_features=150, bias=True)
+  (activation): Tanh()
   (out): Linear(in_features=150, out_features=17, bias=True)
-  (crf): CRF()
+  (crf): CRF(n_tags=17)
   (drop): Dropout(p=0.5)
 )
 # ELMo+BiLSTM+CRF
 ELMO_LSTM_CRF(
   (embed): Embedding(405440, 100)
-  (scalar_mix): ScalarMix()
-  (lstm): LSTM(1124, 150, batch_first=True, bidirectional=True)
-  (hid): Sequential(
-    (0): Linear(in_features=300, out_features=150, bias=True)
-    (1): Tanh()
+  (scalar_mix): ScalarMix(n_reprs=3)
+  (char_lstm): CharLSTM(
+    (embed): Embedding(517, 30)
+    (lstm): LSTM(30, 150, batch_first=True, bidirectional=True)
   )
+  (word_lstm): LSTM(1424, 150, batch_first=True, bidirectional=True)
+  (hid): Linear(in_features=300, out_features=150, bias=True)
+  (activation): Tanh()
   (out): Linear(in_features=150, out_features=17, bias=True)
-  (crf): CRF()
+  (crf): CRF(n_tags=17)
   (drop): Dropout(p=0.5)
 )
 ```
@@ -97,7 +97,7 @@ ELMO_LSTM_CRF(
   * Dev: 3466
   * Test: 3684
 
-|               |  Dev   |  Test  |     mT(s)      |
+|               | Dev    | Test   | mT(s)          |
 | :-----------: | :----: | :----: | :------------: |
 | CHAR_LSTM_CRF | 94.49% | 90.72% | 0:01:50.889580 |
 | ELMO_LSTM_CRF | 95.64% | 92.09% | 0:01:46.960411 |
@@ -110,7 +110,7 @@ ELMO_LSTM_CRF(
   * Dev: 1000
   * Test: 2012
 
-|               |  Dev   |  Test  |     mT(s)      |
+|               | Dev    | Test   | mT(s)          |
 | :-----------: | :----: | :----: | :------------: |
 | CHAR_LSTM_CRF | 95.02% | 94.51% | 0:01:21.141716 |
 | ELMO_LSTM_CRF | 97.08% | 96.34% | 0:01:14.761098 |
@@ -123,7 +123,7 @@ ELMO_LSTM_CRF(
   * Dev: 5527
   * Test: 5462
 
-|               |  Dev   |  Test  |     mT(s)      |
+|               | Dev    | Test   | mT(s)          |
 | :-----------: | :----: | :----: | :------------: |
 | CHAR_LSTM_CRF | 97.68% | 97.64% | 0:05:59.462637 |
 | ELMO_LSTM_CRF | 97.86% | 97.81% | 0:05:55.335100 |

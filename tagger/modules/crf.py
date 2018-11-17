@@ -99,6 +99,6 @@ class CRF(nn.Module):
                 prev = paths[j, i, prev]
                 predict.append(prev)
             # flip the predicted sequence before appending it to the list
-            predicts.append(torch.tensor(predict, device=emit.device).flip(0))
+            predicts.append(paths.new_tensor(predict).flip(0))
 
         return predicts
